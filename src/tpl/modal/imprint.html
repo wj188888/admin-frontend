@@ -1,0 +1,25 @@
+<div class="asset-dialog">
+    <div class="ticket-dialog">
+        <span class="close-icon" data-ng-click="vm.confirmFunc()"></span>
+        <h2>版本说明</h2>
+    </div>
+
+    <div class="text-content pad-l-20 pad-r-20 font-size-14">
+        <div class="c_333 mar-b-10">
+            <span class="mar-0 pad-0" data-ng-if="vm.imprintList.os == 0">Android</span>
+            <span class="mar-0 pad-0" data-ng-if="vm.imprintList.os == 1">iOS</span>
+            <span data-ng-if="vm.imprintList.os == null && vm.imprintList.os == ''">-</span>
+            <span>{{vm.imprintList.versionNumber1}}.{{vm.imprintList.versionNumber2}}.{{vm.imprintList.versionNumber3}}</span>
+        </div>
+
+        <p class="inprint_box">{{vm.imprintList.remark}}</p>
+    </div>
+
+
+    <div class="ticket-operator">
+        <div class="clearfix btn_box">
+            <a class="btn w-xs btn-info"
+               data-ng-click="vm.confirmFunc()">知道了</a>
+        </div>
+    </div>
+</div>

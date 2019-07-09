@@ -1,0 +1,90 @@
+<div class="bg-light lter b-b wrapper">
+    <div class="third-sidebar-box">
+        <ul class="clearfix">
+            <li>
+                <a ui-sref="app.shop.shopVerify">查看列表</a>
+            </li>
+            <li>
+                <a  class="active">申请列表</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix p-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.staDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>店铺名：</label>
+                            <input type="text" data-ng-model="search.brandName" class="inp larger"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="con-bottom clearfix">
+                    <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                    <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper mg-top-15">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-left">店铺名</th>
+                    <th>类别</th>
+                    <th>负责人电话</th>
+                    <th>申请时间</th>
+                    <th>公司名称</th>
+                    <th>公司性质</th>
+                    <th>状态</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in options.dataList">
+                    <td class="text-left">{{item.brandName}}</td>
+                    <td>
+                        <span ng-if="item.type==0">企业</span>
+                        <span ng-if="item.type==1">个人</span>
+                    </td>
+                    <td>{{item.managerTelephone}}</td>
+                    <td>{{item.applyTime}}</td>
+                    <td>{{item.firmFullName}}</td>
+                    <td> {{item.firmTypeString}}</td>
+                    <td>
+                        <span ng-if="item.storeState=='PROBATION'">试用期</span>
+                        <span ng-if="item.storeState=='UN_AUTHENTICATED'">未认证</span>
+                        <span ng-if="item.storeState=='AUTHENTICATED'">已认证</span>
+                        <span ng-if="item.storeState=='UNDER_AUTHENTICATED'">认证中</span>
+                        <span ng-if="item.storeState=='PRE_EXPIRED'">即将到期</span>
+                        <span ng-if="item.storeState=='EXPIRED'">已过期</span>
+                        <span ng-if="item.storeState=='UNPASS_AUTHENTICATED'">
+                            驳回
+                            <a class="btn btn-sm btn-primary" style="margin-left: 5px;" data-ng-click="vm.showDetail(item.qualificationFailReason)">详情</a>
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a class="btn btn-sm btn-info" data-ng-click="handle(item)">处理</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

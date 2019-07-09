@@ -1,0 +1,87 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">标签列表</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>标签类型：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.labelType"
+                                    data-ng-options="x.value as x.key for x in vm.types">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="con-bottom clearfix">
+                        <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                        <a class="btn w-xs btn-default" data-ng-click="vm.cancelSearch()">清空条件</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-l m-r">
+            <button class="btn btn-sm btn-info" data-ng-click="vm.createPath()">创建标签</button>
+        </div>
+        <div class="wrapper">
+            <table class="table m-b-none"  >
+                <thead>
+                <tr>
+                    <th class="text-left" width="10%">
+                        <label class="checkbox-inline i-checks"  >
+                            <input type="checkbox"
+                                   data-ng-click="vm.checkAllFunc()"
+                                   data-ng-checked="vm.checkAllState">
+                            <i></i>
+                            <!--编号-->
+                        </label>
+                    </th>
+                    <th width="25%">类型</th>
+                    <th width="25%">标签名</th>
+                    <th width="25%">内容</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left" width="10%">
+                        <label class="checkbox-inline i-checks">
+                            <input type="checkbox" id={{data.id}} name="{{data.labelName}}" class="chooseFlag"
+                                   data-ng-checked="vm.isSelected(data.id)"
+                                   data-ng-click="vm.updateSelection($event,data.id)">
+                            <i></i>
+                            <!--{{data.id}}-->
+                        </label>
+                    </td>
+                   <td>
+                       <span data-ng-if="data.type==0">
+                           平台认证
+                       </span>
+                       <span data-ng-if="data.type==1">
+                           车辆认证
+                       </span>
+                       <span data-ng-if="data.type==2">
+                           司机认证
+                       </span>
+                   </td>
+                    <td>{{data.labelName}}</td>
+                    <td>{{data.labelContent}}</td>
+                    <td class="text-right" nowrap>
+                        <div class="buttons" style="min-width: 150px;">
+                             <a class="btn btn-sm btn-primary" data-ng-click="vm.handle(data)">编辑</a>
+                            <a class="btn btn-sm btn-warning" data-ng-click="vm.deleteLabel(data.id)">删除</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="mg-top-15" >
+                <button class="btn btn-sm btn-primary" data-ng-click="vm.batchDelete()">批量删除</button>
+            </div>
+            <page-data options="options"></page-data>
+        </div>
+
+    </div>
+</div>

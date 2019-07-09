@@ -1,0 +1,360 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3" >
+        <span class="cursor-pointer" ui-sref="app.assetManage.feeManage">计费管理</span>
+        <span>-</span>
+        <span>新增计费</span>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix pad-l-20">
+                <ul class="buy-nav">
+                    <li class="col-xs-6">
+                        <a >1-基础信息</a>
+                    </li>
+                    <li class="col-xs-6">
+                        <a class="active">2-计费规则</a>
+                    </li>
+                </ul>
+                <div class="condition-top clearfix">
+
+                </div>
+            </div>
+            <!--自定义计费规则开始-->
+            <div class="filter-condition clearfix custom-rule"
+                 data-ng-repeat="rule in vm.FeeRuleMessage.detailFeeRateList"
+                 style="padding:0 20px 20px 20px">
+                <div class="custom-rule-contentBox">
+                    <div class="group-old rule-name">
+                        <label>规则名称：</label>
+                        <input data-ng-model="rule.alias" type="text" id="name{{$index}}"
+                               class="inp larger"/>
+                        <button class="option-create"
+                                data-ng-click="vm.addRule()"></button>
+                    </div>
+                    <div class="group-old rule-name border-b-none">
+                        <label>规则有效期：</label>
+                        <input id="fromTime{{$index}}" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                               data-ng-model="rule.startDate"  class="inp larger"/>
+                        <span class="mar-lr-9 pull-left">至</span>
+                        <input id="toTime{{$index}}" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                               data-ng-model="rule.endDate" class="inp larger"/>
+                    </div>
+                </div>
+
+                <!--自营渠道开始-->
+                <div class="block-head-p">1、自营渠道</div>
+                <div class="product-bog-classfy pull-left">
+                    <span class="top">产品大类</span>
+                    <p>交通出行</p>
+                    <span class="bottom">旅游度假</span>
+                </div>
+                <div class="wrapper product-table pad-0">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-left">产品细类</th>
+                            <th>连接佣金</th>
+                            <th>连接服务费</th>
+                            <th>银行手续费</th>
+                            <th>连接保险分成</th>
+                            <th class="text-right">保险公司分成</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="data in rule.productFeeRateList"
+                            data-ng-class="{'white-back':$index%2===0}">
+                            <td class="text-left">
+                                <span>{{data.productTypeLevelOne | productName}}</span>
+                            </td>
+                            <td class="min-width-90">
+                                <input type="text" class="inpSmall"
+                                       data-ng-model="data.platformRate"/>
+                                <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformServiceType == 1">
+                                <select class="inp width-140"
+                                        data-ng-change="vm.changePlatformType(data.platformServiceType, rule.ruleIndex)"
+                                        data-ng-model="data.platformServiceType"
+                                        data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                    <option value="">请选择</option>
+                                </select>
+                                <div data-ng-show="data.platformServiceType == 1">
+                                    <input type="text" class="inpSmall mar-l-10"
+                                           data-ng-model="data.platformServiceRate"/>
+                                    <span class="pull-left line-height-30">&nbsp;&nbsp;%&nbsp;&nbsp;</span>
+                                </div>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformServiceType == 2">
+                                <div data-ng-show="data.productTypeLevelOne == 'LINE_BUS'">
+                                    <select class="inp width-140"
+                                            data-ng-change="vm.changePlatformType(data.platformServiceType, rule.ruleIndex)"
+                                            data-ng-model="data.platformServiceType"
+                                            data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <div data-ng-show="data.platformServiceType == 2">
+                                        <input type="text" class="inpSmall mar-l-10"
+                                               data-ng-model="rule.fixPlatformFixServiceFee"/>
+                                        <span class="pull-left line-height-30">&nbsp;&nbsp;元&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div data-ng-show="data.platformServiceType == 2">
+                                        <select class="inp width-140"
+                                                data-ng-change="vm.isManOne(data.platformFixServiceFeeType,rule.ruleIndex)"
+                                                data-ng-model="data.platformFixServiceFeeType"
+                                                data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeTwos">
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <div data-ng-show="data.platformFixServiceFeeType == 1 ">
+                                            <input type="text" class="inpSmall mar-l-10"
+                                                   data-ng-model="rule.fixPlatformFixServiceFeeRate"/>
+                                            <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td class="min-width-90">
+                                <input disabled type="text" class="inpSmall" value="0.6"/>
+                                <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformInsuranceType == 1">
+                                <select class="inp width-140"
+                                        data-ng-change="vm.changeplatformInsuranceType(data.platformInsuranceType,rule.ruleIndex)"
+                                        data-ng-model="data.platformInsuranceType"
+                                        data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                    <option value="">请选择</option>
+                                </select>
+                                <div data-ng-show="data.platformInsuranceType == 1">
+                                    <input type="text" class="inpSmall mar-l-10"
+                                           data-ng-model="data.platformInsuranceRate"/>
+                                    <span class="pull-left line-height-30">&nbsp;&nbsp;%&nbsp;&nbsp;</span>
+                                </div>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformInsuranceType == 2">
+                                <div data-ng-show="data.productTypeLevelOne == 'LINE_BUS'">
+                                    <select class="inp width-140"
+                                            data-ng-change="vm.changeplatformInsuranceType(data.platformInsuranceType,rule.ruleIndex)"
+                                            data-ng-model="data.platformInsuranceType"
+                                            data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <div data-ng-show="data.platformInsuranceType == 2">
+                                        <input type="text" class="inpSmall mar-l-10"
+                                               data-ng-model="rule.fixPlatformFixInsuranceFee"/>
+                                        <span class="pull-left line-height-30">&nbsp;&nbsp;元&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div data-ng-show="data.platformInsuranceType == 2">
+                                        <select class="inp width-140"
+                                                data-ng-model="data.platformFixInsuranceFeeType"
+                                                data-ng-change="vm.isManTwo(data.platformFixInsuranceFeeType,rule.ruleIndex)"
+                                                data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeTwos">
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <div data-ng-show="data.platformFixInsuranceFeeType == 1 ">
+                                            <input type="text" class="inpSmall mar-l-10"
+                                                   data-ng-model="rule.fixPlatformFixInsuranceFeeRate"/>
+                                            <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right min-width-90" style="padding-right:0">
+                                <input type="text" class="inpSmall"
+                                       data-ng-model="data.firmInsuranceRate "/>
+                                <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--分销渠道开始-->
+                <div class="block-head-p">2、分销渠道</div>
+                <div class="product-bog-classfy pull-left">
+                    <span class="top">产品大类</span>
+                    <p>交通出行</p>
+                    <span class="bottom">旅游度假</span>
+                </div>
+                <div class="wrapper product-table pad-0">
+                    <table id="treeTable_xxl" class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-left">产品细类</th>
+                            <th>分销佣金</th>
+                            <th>连接服务费</th>
+                            <th class="text-right">分销服务费</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="data in rule.productFeeRateList"
+                            data-ng-class="{'white-back':$index%2===0}">
+                            <td class="text-left ">
+                                <span>{{data.productTypeLevelOne | productName}}</span>
+                            </td>
+                            <td >
+                                <input type="text" class="inpSmall-clear width-120 clear-both"
+                                       data-ng-model="data.distributorRate"/>
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformServiceType == 1">
+                                <select disabled class="inp width-140"
+                                        data-ng-change="vm.changePlatformType(data.platformServiceType, rule.ruleIndex)"
+                                        data-ng-model="data.platformServiceType"
+                                        data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                    <option value="">请选择</option>
+                                </select>
+                                <div data-ng-show="data.platformServiceType == 1">
+                                    <input disabled type="text" class="inpSmall mar-l-10"
+                                           data-ng-model="data.platformServiceRate"/>
+                                    <span class="pull-left line-height-30">&nbsp;&nbsp;%&nbsp;&nbsp;</span>
+                                </div>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformServiceType == 2">
+                                <div data-ng-show="data.productTypeLevelOne == 'LINE_BUS'">
+                                    <select disabled class="inp width-140"
+                                            data-ng-change="vm.changePlatformType(data.platformServiceType, rule.ruleIndex)"
+                                            data-ng-model="data.platformServiceType"
+                                            data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <div data-ng-show="data.platformServiceType == 2">
+                                        <input disabled type="text" class="inpSmall mar-l-10"
+                                               data-ng-model="rule.fixPlatformFixServiceFee"/>
+                                        <span class="pull-left line-height-30">&nbsp;&nbsp;元&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div data-ng-show="data.platformServiceType == 2">
+                                        <select disabled class="inp width-140"
+                                                data-ng-change="vm.isManOne(data.platformFixServiceFeeType,rule.ruleIndex)"
+                                                data-ng-model="data.platformFixServiceFeeType"
+                                                data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeTwos">
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <div data-ng-show="data.platformFixServiceFeeType == 1 ">
+                                            <input disabled type="text" class="inpSmall mar-l-10"
+                                                   data-ng-model="rule.fixPlatformFixServiceFeeRate"/>
+                                            <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td class="text-right">
+                                <input type="text" class="inpSmall-clear width-120"
+                                       data-ng-model="data.firmServiceRate"/>
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--共享渠道开始-->
+                <div class="block-head-p">3、共享渠道</div>
+                <div class="product-bog-classfy pull-left">
+                    <span class="top">产品大类</span>
+                    <p>交通出行</p>
+                    <span class="bottom">旅游度假</span>
+                </div>
+                <div class="wrapper product-table pad-0">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-left">产品细类</th>
+                            <th>连接佣金</th>
+                            <th>共享佣金</th>
+                            <th>银行手续费</th>
+                            <th>连接保险分成</th>
+                            <th class="text-right">保险公司分成</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="data in rule.productFeeRateList"
+                            data-ng-class="{'white-back':$index%2===0}">
+                            <td class="text-left">
+                                <span>{{data.productTypeLevelOne | productName}}</span>
+                            </td>
+                            <td>
+                                <input disabled type="text" class="inpSmall-clear width-80 clear-both"
+                                       data-ng-model="data.platformRate"/>
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td>
+                                <input disabled type="text" class="inpSmall-clear width-80"
+                                       data-ng-model="data.distributorRate"/>
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td>
+                                <input disabled type="text" value="0.6"
+                                       class="inpSmall-clear width-80" />
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformInsuranceType == 1">
+                                <select class="inp width-140"
+                                        data-ng-change="vm.changeplatformInsuranceType(data.platformInsuranceType,rule.ruleIndex)"
+                                        data-ng-model="data.platformInsuranceType"
+                                        data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                    <option value="">请选择</option>
+                                </select>
+                                <div data-ng-show="data.platformInsuranceType == 1">
+                                    <input type="text" class="inpSmall mar-l-10"
+                                           data-ng-model="data.platformInsuranceRate"/>
+                                    <span class="pull-left line-height-30">&nbsp;&nbsp;%&nbsp;&nbsp;</span>
+                                </div>
+                            </td>
+                            <td class="min-width-360" data-ng-show="data.platformInsuranceType == 2">
+                                <div data-ng-show="data.productTypeLevelOne == 'LINE_BUS'">
+                                    <select disabled class="inp width-140"
+                                            data-ng-change="vm.changeplatformInsuranceType(data.platformInsuranceType,rule.ruleIndex)"
+                                            data-ng-model="data.platformInsuranceType"
+                                            data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeOnes">
+                                        <option value="">请选择</option>
+                                    </select>
+                                    <div data-ng-show="data.platformInsuranceType == 2">
+                                        <input disabled type="text" class="inpSmall mar-l-10"
+                                               data-ng-model="rule.fixPlatformFixInsuranceFee"/>
+                                        <span class="pull-left line-height-30">&nbsp;&nbsp;元&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div data-ng-show="data.platformInsuranceType == 2">
+                                        <select disabled class="inp width-140"
+                                                data-ng-model="data.platformFixInsuranceFeeType"
+                                                data-ng-change="vm.isManTwo(data.platformFixInsuranceFeeType,rule.ruleIndex)"
+                                                data-ng-options="makeFeeTypeOne.type as makeFeeTypeOne.name for makeFeeTypeOne in vm.makeFeeTypeTwos">
+                                            <option value="">请选择</option>
+                                        </select>
+                                        <div data-ng-show="data.platformFixInsuranceFeeType == 1 ">
+                                            <input disabled type="text" class="inpSmall mar-l-10"
+                                                   data-ng-model="rule.fixPlatformFixInsuranceFeeRate"/>
+                                            <span class="pull-left line-height-30">&nbsp;&nbsp;%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-right" >
+                                <input disabled type="text" class="inpSmall-clear width-80"
+                                       data-ng-model="data.firmInsuranceRate "/>
+                                <span class="line-height-30">&nbsp;&nbsp;%</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <!--自定义计费规则结束-->
+            <!--底部操作按钮-->
+            <div class="form-group overflow-hidden">
+                <div class="col-sm-4 col-sm-offset-3">
+                    <button class="btn btn-sm btn-info"
+                            data-ng-click="vm.gotoPre()">上一步</button>
+                    <input type="submit" class="btn btn-sm btn-info" data-ng-click="vm.newRuleCreateBtn.newRuleCreate()" data-ng-disabled="vm.newRuleCreateBtn.disabled"
+                           value="{{vm.newRuleCreateBtn.text}}">
+                    <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

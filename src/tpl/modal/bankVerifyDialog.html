@@ -1,0 +1,16 @@
+<div class="reset-dialog" style="padding:10px 0;" >
+    <h4>打款录入</h4>
+    <div class="reset-item clearfix">
+        <p style="padding:0 20px;">
+            请录入打款金额，确认后我们会立即短信通知客户。
+        </p>
+    </div>
+    <div class="reset-item bank clearfix">
+        <label style="width: 150px;">已打款&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="money" style="width:150px;" placeholder="请输入金额" data-ng-model="vm.modalMoney">
+    </div>
+    <div class="reset-item clearfix" style="text-align: center;margin-top: 20px;">
+        <a class="btn btn-sm btn-default" data-ng-click="vm.closeDialog()">取消</a>
+        <a class="btn btn-sm btn-info" data-ng-click="vm.handleMoney()">确认</a>
+    </div>
+</div>

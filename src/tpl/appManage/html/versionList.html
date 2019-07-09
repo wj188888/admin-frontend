@@ -1,0 +1,120 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">版本列表</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="clearfix ">
+            <!--<div class="col-sm-12 m-b-xs">
+                <label>更新时间&nbsp;&nbsp;&nbsp;&nbsp;：</label>
+                <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                       data-ng-model="search.start" class="form-control input-sm w-sm inline m-r"/>
+                <span style="margin-right:15px;">至</span>
+                <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                       data-ng-model="search.end" class="form-control input-sm w-sm inline m-r">
+            </div>
+            <div class="col-sm-12 m-b-xs">
+                <label>APP版本号：</label>
+                <input placeholder="请输入APP版本号" data-ng-model="search.appVersion" type="text"
+                       class="form-control input-sm w-sm inline m-r"/>
+                <label>修复版本号：</label>
+                <input placeholder="请输入修复版本号" data-ng-model="search.hotReapirVersion" type="text"
+                       class="form-control input-sm w-sm inline m-r"/>
+            </div>
+            <div class="col-sm-12 m-b-xs">
+                <button class="btn btn-sm btn-info" data-ng-click="searchFunction()">筛选</button>
+            </div>-->
+            <div class="mg-b-15"  >
+                <button class="btn btn-sm btn-info"
+                        ui-sref="app.appManage.createVersion">创建版本</button>
+            </div>
+
+            <table class="table mg-top-15" style="text-align: center">
+                <thead>
+                <!--<tr>
+                    <th class="text-left">产品类别</th>
+                    <th>修复版本号</th>
+                    <th>修复包更新内容</th>
+                    <th>是否强制更新</th>
+                    <th>APP版本号</th>
+                    <th>APP版本别名</th>
+                    <th>下载链接</th>
+                    <th>修复包下载地址</th>
+                    <th>更新的类容</th>
+                    <th class="text-right">操作</th>
+                </tr>-->
+                <tr>
+                    <th class="text-left">应用渠道</th>
+                    <th>产品类别</th>
+                    <th>版本号</th>
+                    <th>更新方式</th>
+                    <th>更新内容</th>
+                    <th>更新开关</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <!--应用渠道-->
+                    <td class="text-left">
+                        <img data-ng-if="data.appChannel == 0"
+                             class="application" src="img/Android-big-hover.png" alt="安卓">
+                        <img data-ng-if="data.appChannel == 1"
+                             class="application" src="img/iPhone.png" alt="苹果">
+                    </td>
+                    <!--产品类别-->
+                    <td>{{data.productTypeLevelOne |productName}}</td>
+                    <!--app版本号-->
+                    <td>
+                        <p>{{data.versionNum}}</p>
+                    </td>
+                    <!--更新方式-->
+                    <td>
+                        <span data-ng-if="data.updateMode ==1">强制更新</span>
+                        <span data-ng-if="data.updateMode ==0">非强制更新</span>
+                    </td>
+                    <!--修复版本号-->
+                   <!-- <td>
+                        {{data.hotReapirVersion}}
+                    </td>-->
+                    <!--修复包更新内容-->
+                    <!--<td>
+                        {{data.hotSpirtContent}}
+                    </td>-->
+
+                    <!--APP版本别名-->
+                    <!--<td>
+                        <p>{{data.alias}}</p>
+                    </td>-->
+                    <!--下载链接-->
+                    <!--<td>
+                        {{data.downloadUrl}}
+                    </td>-->
+                    <!--修复包下载地址-->
+                    <!--<td>
+                        {{data.hotSpirtUrl}}
+                    </td>-->
+                    <!--更新的内容-->
+                    <td>
+                        {{data.updateContent}}
+                    </td>
+                    <!--更新开关-->
+                    <td>
+                        <div class="ui-switcher-small"
+                             data-ng-click="vm.choiceSet(data, $index)"
+                             data-ng-class="{'ui-switcher-on': data.updateSwitch == 1 , 'ui-switcher-off': data.updateSwitch == 0}"></div>
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a class="btn btn-sm btn-primary"
+                               ui-sref="app.appManage.editVersion({id: data.id})">编辑</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+        </div>
+    </div>
+</div>

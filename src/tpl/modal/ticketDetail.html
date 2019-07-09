@@ -1,0 +1,204 @@
+<div class="asset-dialog">
+    <div class="ticket-dialog">
+        <span class="close-icon" data-ng-click="vm.cancleFunc()"></span>
+        <!-- 状态1待审核2已驳回3待开票4已邮寄5已完成  -->
+        <h2 data-ng-show="vm.infoData.status==1">待审核</h2>
+        <h2 data-ng-show="vm.infoData.status==2">已驳回</h2>
+        <h2 data-ng-show="vm.infoData.status==3">待开票</h2>
+        <h2 data-ng-show="vm.infoData.status==4">已邮寄</h2>
+        <h2 data-ng-show="vm.infoData.status==5">已完成</h2>
+        <!--发票信息-->
+        <div class="ticket-info">
+            <div class="info-top clearfix">
+                <div class="info-left">
+                    <div class="info-item clearfix">
+                        <label>申请时间：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.createdTime">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>开票金额：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.amount">
+                        <span class="unit">元</span>
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>发票类型：</label>
+                        <span class="inp" data-ng-if="vm.infoData.invoiceType==0">电子发票</span>
+                        <span class="inp" data-ng-if="vm.infoData.invoiceType==1">纸质发票</span>
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>公司名称：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.companyName">
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="info-item clearfix">
+                        <label>纳税人识别号：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.taxIDNumber">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>地址：</label>
+                        <span class="inp">
+						{{vm.infoData.companyProvince}}{{vm.infoData.companyCity}}
+						{{vm.infoData.companyCounty}}{{vm.infoData.companyAddress}}
+					</span>
+
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>电话：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.legalTel">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>开户行及账户：</label>
+                        <div class="inp">
+                            <span>{{vm.infoData.bankDept}}</span>
+                            <span data-ng-if="vm.infoData.bankNo">，{{vm.infoData.bankNo}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="info-bot clearfix">
+                <div class="info-left">
+                    <div class="info-item clearfix">
+                        <label>收件人姓名：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.recipients">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>联系电话：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.recipientTel">
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="info-item clearfix">
+                        <label>邮寄地址：</label>
+                        <span class="inp">
+					{{vm.infoData.recipientProvince}}
+					{{vm.infoData.recipientCity}}
+					{{vm.infoData.recipientCounty}}
+					{{vm.infoData.recipientAddress}}
+					</span>
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>E-mail：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.recipientEmail">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--发票信息结束-->
+        <!-- 状态1待审核2已驳回3待开票4已邮寄5已完成  -->
+        <!--文本域-->
+        <div data-ng-show="vm.infoData.status==1">
+            <h2 style="border:none;margin-top:10px;">输入理由：</h2>
+            <div class="text-content">
+			<textarea data-ng-model="vm.infoData.message">
+			</textarea>
+            </div>
+        </div>
+        <div data-ng-show="vm.infoData.status==2&&vm.infoData.message" style="margin-top:10px;">
+            <div class="text-content">
+			<textarea data-ng-model="vm.infoData.message"
+                      data-ng-disabled="true">
+			</textarea>
+            </div>
+        </div>
+        <!--文本域结束-->
+        <!--物流信息填写-->
+        <!-- 状态1待审核2已驳回3待开票4已邮寄5已完成  -->
+        <div data-ng-if="vm.infoData.status==3">
+            <h2 style="border:none;margin-top:10px;">物流信息</h2>
+            <div class="logistic-info">
+                <div class="log-top" style="border:none;">
+                    <div class="info-item clearfix">
+                        <label>发票号码：</label>
+                        <input class="inp white-inp" id="invoiceNo"
+                               data-ng-model="vm.infoData.invoiceNo" type="text">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>公司名称：</label>
+                        <select class="inp white-inp" id="companyName"
+                                ng-model="vm.choosedCompany"
+                                data-ng-options="company.name for company in vm.companyData">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>快递单号：</label>
+                        <input class="inp white-inp" id="logisticsNo"
+                               data-ng-model="vm.infoData.logisticsNo" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--物流信息填写结束-->
+        <!--物流信息显示-->
+        <div data-ng-if="vm.infoData.status==4||vm.infoData.status==5">
+            <h2 style="border:none;margin-top:10px;">物流信息</h2>
+            <div class="logistic-info">
+                <div class="log-top">
+                    <div class="info-item clearfix">
+                        <label>发票号码：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.invoiceNo">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>公司名称：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.logisticsName">
+                    </div>
+                    <div class="info-item clearfix">
+                        <label>快递单号：</label>
+                        <input class="inp" type="text" disabled="true"
+                               data-ng-model="vm.infoData.logisticsNo">
+                    </div>
+                </div>
+                <div class="log-bot">
+                    <ul class="info-list" data-ng-show="vm.logistics.length>0">
+                        <li class="clearfix" data-ng-repeat="logistic in vm.logistics track by $index">
+                            <div class="border" data-ng-show="$index < vm.logistics.length-1"></div>
+                            <div class="time">{{logistic.acceptTime}}</div>
+                            <div class="big-circle">
+                                <div class="circle" data-ng-class="{'active':$index==0}"></div>
+                            </div>
+                            <div class="station">{{logistic.acceptStation}}</div>
+                        </li>
+                    </ul>
+                    <p class="no-tip" data-ng-show="vm.logistics.length==0">暂无物流信息！</p>
+                </div>
+            </div>
+        </div>
+        <!--物流信息显示结束-->
+    </div>
+    <!-- 状态1待审核2已驳回3待开票4已邮寄5已完成  -->
+    <div class="ticket-operator" data-ng-if="vm.infoData.status==1">
+        <div class="mid clearfix">
+            <a class="btn w-xs btn-default"
+               data-ng-click="vm.rejectAgreeFunc(1)">驳回</a>
+            <a class="btn w-xs btn-success"
+               data-ng-click="vm.rejectAgreeFunc(2)">通过</a>
+        </div>
+    </div>
+    <div class="ticket-operator"
+         data-ng-if="vm.infoData.status==2||vm.infoData.status==4||vm.infoData.status==5">
+        <div class="mid clearfix" style="width:80px;">
+            <a class="btn w-xs btn-default"
+               data-ng-click="vm.cancleFunc()">关闭</a>
+        </div>
+    </div>
+    <div class="ticket-operator" data-ng-if="vm.infoData.status==3">
+        <div class="mid clearfix">
+            <a class="btn w-xs btn-default"
+               data-ng-click="vm.cancleFunc()">取消</a>
+            <a class="btn w-xs btn-success"
+               data-ng-click="vm.saveLogistic()">提交</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">菜单管理</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="m-l m-r m-t">
+            <button class="btn btn-sm btn-info" ui-sref="app.system.createMenu">创建主菜单</button>
+        </div>
+        <div class="wrapper">
+            <table id="treeTable_xxl" class="table">
+                <thead>
+                <tr>
+                    <th class="text-left">编号</th>
+                    <th>名称</th>
+                    <th>链接</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id="{{data.id}}"     data-ng-repeat="data in options.dataList">
+                    <td class="text-left" width="10%">
+                        <span  >{{data.code}}</span>
+                    </td>
+                    <td width="15%">
+                        <span  >{{data.menu_name}}</span>
+                    </td>
+                    <td width="60%">
+                        {{data.menu_path}}
+                    </td>
+                    <td class="text-right" width="15%">
+                        <a class="btn btn-sm btn-primary" data-ng-if="data.series == 1 || data.series==2"
+                           ui-sref="app.system.createNextMenu({fatherId: data.id})">添加下级菜单</a>
+                        <a class="btn btn-sm btn-default" data-ng-if="data.series == 3">添加下级菜单</a>
+                        <a class="btn btn-sm btn-primary" ui-sref="app.system.createMenu({id: data.id})">编辑</a>
+                        <a class="btn btn-sm btn-warning" data-ng-click="vm.deleteMenu(data.id)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>
+
+

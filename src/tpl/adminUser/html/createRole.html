@@ -1,0 +1,36 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">用户管理-{{vm.text}}角色</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请认真填写角色信息</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">角色名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="roleName" data-ng-model="vm.Role.roleName" class="form-control m-b" placeholder="请输入角色名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">菜单权限树：</label>
+                        <div class="col-sm-9">
+                            <ul id="ztree" ztree ztree-config="ztreeConfig" class="ztree"></ul>
+                            <p class="error-msg" data-ng-class="{'hide': vm.hideMenuError}">请至少选择一个要分配的菜单</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createRole()">保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">车辆认证</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.staDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>状态：</label>
+                            <select class="inp larger" data-ng-model="search.qualification">
+                                <option value="">全部</option>
+                                <option value="0">未认证</option>
+                                <option value="1">已认证</option>
+                                <!--<option value="3">认证即将到期</option>
+                                <option value="4">认证已过期</option>
+                                <option value="5">认证失败</option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>车牌号：</label>
+                            <select class="inp smaller mg-rt-10" data-ng-model="search.licensePlatType">
+                                <option value="">类型</option>
+                                <option value="0">黄牌</option>
+                                <option value="1">蓝牌</option>
+                            </select>
+                            <select id="licensePlatProvince" class="inp smaller mg-rt-10"
+                                    data-ng-model="search.licensePlatProvince"
+                                    data-ng-options="licensePlatProvince for licensePlatProvince in licensePlatProvinces">
+                                <option value="">省份</option>
+                            </select>
+                            <input id="number" placeholder="请输入车牌号" ng-change="vm.uppercase()" maxlength="6" data-ng-model="search.licensePlat" type="text"
+                                   class="inp s-middle"/>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper pad-t-0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <!--<th>车主姓名</th>-->
+                    <th class="text-left">车牌号</th>
+                    <th>车龄</th>
+                    <th>隶属关系</th>
+                    <th>申请时间</th>
+                    <th>状态</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in options.dataList">
+                    <!--<td>{{item.ownerName}}</td>-->
+                    <!--<td class="text-left">{{item.licensePlatProvince}}{{item.licensePlat}}</td>-->
+                    <td class="text-left">
+                        <p>
+                            <span data-ng-bind="item.licensePlatProvince"></span>
+                            <span>{{item.licensePlat | uppercase}}</span>
+                            <i data-ng-class="{'car-plat-blue-round':item.licensePlatType==1,'car-plat-yellow-round':item.licensePlatType==0}">
+                            </i>
+                        </p>
+                        <p>
+                            <span>{{item.totalSeats}}</span>座 -
+                            <span>{{item.brandName}}</span>
+                        </p>
+                    </td>
+                    <td>
+                        <span data-ng-if="item.carAge">{{item.carAge}}年</span>
+                        <span data-ng-if="!item.carAge">-</span>
+                    </td>
+                    <td>
+                        <span>{{item.belongType | belongTypeCar}}</span>
+                        <!--隶属关系：0挂靠，1自营；必填字段-->
+                    </td>
+                    <td>{{item.applyTime}}</td>
+                    <td>
+                        <span class="driver-qualification car-qualification" data-ng-class="{true: 'caryes', false: 'carno'}[item.qualification == 1]"
+                              tooltip="{{(item.qualification == 1) ? '已认证' : '未认证'}}">
+                                <i data-ng-if="item.subQualification == 6"></i>
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a data-ng-if="item.subQualification == 6" class="btn btn-sm btn-info" data-ng-click="handle(item)">处理</a>
+                            <a data-ng-if="item.subQualification != 6" class="btn btn-sm btn-info" data-ng-click="handle(item)">查看</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

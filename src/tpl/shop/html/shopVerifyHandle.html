@@ -1,0 +1,195 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">店铺认证</h1>
+</div>
+<div class="wrapper-md">
+    <div class="row white-back" style="margin:0">
+        <div class="panel-default">
+            <div class="panel-heading font-bold">
+                平台信息
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <form name="device" class="form-horizontal form-validation">
+                <div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">平台品牌：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.brandName}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">平台头像：</label>
+                            <div class="col-sm-3">
+                                <img class="image-box" ng-src="{{page.logo}}">
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">品牌保护：</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<img class="image-box" style="float: left;width: 100%;">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所在城市：</label>
+                            <div class="col-sm-3">
+                                <span class="form-span">{{page.firmProvince.name}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="form-span">{{page.firmCity.name}}</span>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="form-span">{{page.firmCounty.name}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">详细地址</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.firmAddress}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">平台简介：</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" data-ng-model="page.brief" rows="6"></textarea>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label">办公地址：</label>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<select class="form-control m-b" required>-->
+                                    <!--<option value="">-省-</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<select class="form-control m-b" required>-->
+                                    <!--<option value="">-市-</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<select class="form-control m-b" required>-->
+                                    <!--<option value="">-县-</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label"></label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control"  required >-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">法人代表：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.legalPerson}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系电话：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.telephone}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">营业执照：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.businessLicense}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <a ng-href="{{page.businessLicenseImageUrl}}" target="_blank">
+                                    <img class="image-box" ng-src="{{page.businessLicenseImageUrl}}" style="float: left;width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">组织机构代码号：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.organizationCode}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <a ng-href="{{page.organizationCodeImageUrl}}" target="_blank">
+                                    <img class="image-box" ng-src="{{page.organizationCodeImageUrl}}" style="float: left;width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">税务登记证：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.taxRegistrationCert}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <a ng-href="{{page.taxRegistrationCertImageUrl}}" target="_blank">
+                                <img class="image-box" ng-src="{{page.taxRegistrationCertImageUrl}}" style="float: left;width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row white-back" style="margin:20px 0 0 0">
+        <div class="panel-default">
+            <div class="panel-heading font-bold">
+                运营负责人
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <form name="device" class="form-horizontal form-validation">
+                <div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">负责人：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.managerName}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">联系电话：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.managerTelephone}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">微信号：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.managerWechat}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">E-Mail：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.managerEmail}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">身份证号：</label>
+                            <div class="col-sm-9">
+                                <span class="form-span">{{page.managerIDNumber}}</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <a data-ng-repeat="item in page.managerIDImageUrls" ng-href="{{item}}" target="_blank">
+                                <img  ng-src="{{item}}" class="image-box" style="float: left;width:155px;margin-right: 10px;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="panel-footer text-center bg-light lter">
+    <button class="btn btn-success btn-lg" data-ng-hide="page.storeState=='AUTHENTICATED'" data-ng-click="vm.passApply()">审核通过</button>
+    <button class="btn btn-info btn-lg" data-ng-click="vm.rejectApply()">驳回</button>
+</footer>

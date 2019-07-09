@@ -1,0 +1,58 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">车站列表-创建车站</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>车站详情</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">客运站名称：</label>
+                        <div class="col-sm-9">
+                            <input type="text" data-ng-model="vm.Station.name" class="form-control m-b" placeholder="请输入客运站名称" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">地理位置：</label>
+                        <div class="col-sm-3">
+                            <input type="text" data-ng-model="vm.Station.province.name" readonly class="form-control m-b">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" data-ng-model="vm.Station.city.name" readonly class="form-control m-b">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" data-ng-model="vm.Station.county.name" readonly class="form-control m-b">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">详细地址：</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly data-ng-model="vm.Station.address" class="form-control m-b" placeholder="请输入车站详细地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系人姓名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly data-ng-model="vm.Station.contactName" class="form-control m-b" placeholder="请输入联系人姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系电话：</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly data-ng-model="vm.Station.contactPhone" class="form-control m-b" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                   <!-- <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createStation()">保存</button>
+                        </div>
+                    </div>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

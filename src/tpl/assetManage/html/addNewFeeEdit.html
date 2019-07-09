@@ -1,0 +1,167 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3" >
+        <span class="cursor-pointer" ui-sref="app.assetManage.feeManage">计费管理</span>
+        <span>-</span>
+        <span>新增计费</span>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix pad-b-20 pad-l-20" id="container">
+                <ul class="buy-nav">
+                    <li class="col-xs-6">
+                        <a class="active">1-基础信息</a>
+                    </li>
+                    <li class="col-xs-6">
+                        <a>2-计费规则</a>
+                    </li>
+                </ul>
+                <div class="condition-top clearfix">
+                    <div class="con-left width-600 add-new-fee">
+                        <div class="group-old form-item clearfix"  data-ng-hide="vm.ruleData.type==1">
+                            <label>所在城市：</label>
+                            <select id="province" class="form-control small height-30 pull-left"
+                                    data-ng-model="vm.FeeRuleMessage.province" chosen
+                                    data-ng-options="Province.id as Province.alias for Province in vm.provinces"
+                                    data-ng-change="vm.findCity(vm.FeeRuleMessage.province)">
+                                <option value="">省</option>
+                            </select>
+                            <span class="mar-lr-9 pull-left">至</span>
+                            <select id="city" class="form-control small height-30 pull-left"
+                                    data-ng-model="vm.FeeRuleMessage.city" chosen
+                                    data-ng-options="City.id as City.alias for City in vm.citys">
+                                <option value="">市</option>
+                            </select>
+                            <p class="error-tip clearfix" style="padding-left: 70px;" data-ng-hide="vm.showCityError">
+                                请选择城市
+                            </p>
+                        </div>
+                      <!--  <div class="group">
+                            <label>公司名称：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.status"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                            </select>
+                        </div>-->
+                        <div class="group-old">
+                            <label>平台名称：</label>
+                            <select id="storeId" class="inp larger"
+                                    data-ng-model="vm.FeeRuleMessage.storeId"
+                                    data-ng-options="shop.id as shop.name for shop in vm.shopNames">
+                            </select>
+                        </div>
+                        <div class="group-old">
+                            <label>合同编号：</label>
+                            <input id="contractCode"
+                                   data-ng-model="vm.FeeRuleMessage.contractCode" type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group-old">
+                            <label>合同页面：</label>
+                            <div class="form-inline form-auto-h clearfix overflow-inherit">
+                                <div class="upload-box upload-3-small mar-l-130 pull-left">
+                                    <a class="button button-small button-success re-upload re-upload-btn"
+                                       data-ng-show="!vm.disabled" id="jszCard1">
+                                        <i class="glyphicon glyphicon-open"></i>
+                                    </a>
+                                    <p>请上传合同页面</p>
+                                    <a class="upload-img" target="_blank" id="success3">
+                                        <div class="img-mask" data-ng-if="!vm.disabled"></div>
+                                    </a>
+                                    <div id="progress3"></div>
+                                    <input class="jsUpload"  placeholder="请上传合同页面"
+                                           type="hidden" id="success3Input"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-old">
+                            <label>签约代理人：</label>
+                            <input data-ng-model="vm.FeeRuleMessage.contractPerson"
+                                   type="text" id="contractPerson"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group-old">
+                            <label>手机号码：</label>
+                            <input data-ng-model="vm.FeeRuleMessage.contractPersonPhone"
+                                   type="text" id="contractPersonPhone"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group-old">
+                            <label>合同签约日期：</label>
+                            <input id="signDate" type="text" readonly="readonly"
+                                   date-pick format="YYYY-MM-DD"
+                                   data-ng-model="vm.FeeRuleMessage.contractDate"  class="inp larger"/>
+                        </div>
+                        <div class="group-old">
+                            <label>合同生效日期：</label>
+                            <input id="effectiveDate" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="vm.FeeRuleMessage.contractStart"  class="inp larger"/>
+                        </div>
+                        <div class="group-old">
+                            <label>合同截止日期：</label>
+                            <input id="endDate" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="vm.FeeRuleMessage.contractEnd"  class="inp larger"/>
+                        </div>
+                        <div style="margin-bottom: 10px"
+                             class="form-group clear-both overflow-hidden width-600">
+                            <label class="pull-left width-90 text-right line-height-30">保险接口：</label>
+                            <div class="col-sm-9 line-height-30">
+                                <label class="checkbox-inline i-checks">
+                                    <input data-ng-model="vm.FeeRuleMessage.insuranceType"  type="radio" ng-value="0">
+                                    <i></i>
+                                    使用连接
+                                </label>
+                                <label class="checkbox-inline i-checks">
+                                    <input type="radio" data-ng-model="vm.FeeRuleMessage.insuranceType"  ng-value="1">
+                                    <i></i>
+                                    对接第三方
+                                </label>
+                                <span data-ng-if="vm.FeeRuleMessage.insuranceType == 1"
+                                      class="three-service">
+                                    收取技术服务费
+                                    <input type="text"
+                                           data-ng-model="vm.FeeRuleMessage.insuranceServiceRate">
+                                    %
+                                </span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px"
+                             class="form-group clear-both overflow-hidden ">
+                            <label class="pull-left width-90 text-right">计费规则：</label>
+                            <div class="col-sm-9">
+                                <label class="checkbox-inline i-checks">
+                                    <input data-ng-model="vm.FeeRuleMessage.ruleType"
+                                           type="radio" ng-value="0">
+                                    <i></i>
+                                    使用系统默认规则
+                                </label>
+                                <label class="checkbox-inline i-checks">
+                                    <input data-ng-model="vm.FeeRuleMessage.ruleType"
+                                           type="radio" ng-value="1">
+                                    <i></i>
+                                    自定义计费规则
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-ng-show="vm.FeeRuleMessage.ruleType == 0"
+                     class="form-group overflow-hidden">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <input type="submit" class="btn btn-sm btn-info" data-ng-click="vm.newRuleCreateBtnNormal.newRuleCreate()" data-ng-disabled="vm.newRuleCreateBtnNormal.disabled"
+                               value="{{vm.newRuleCreateBtnNormal.text}}">
+                        <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">取消</button>
+                    </div>
+                </div>
+                <div data-ng-hide="vm.FeeRuleMessage.ruleType == 0">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <input type="submit" class="btn btn-sm btn-info" data-ng-click="vm.newRuleCreateBtn.newRuleCreate()" data-ng-disabled="vm.newRuleCreateBtn.disabled"
+                               value="{{vm.newRuleCreateBtn.text}}">
+                        <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

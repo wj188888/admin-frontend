@@ -1,0 +1,51 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">用户列表</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="m-l m-r m-t">
+            <button class="btn btn-sm btn-info" ui-sref="app.system.createUser">创建用户</button>
+        </div>
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-left" nowrap>序号</th>
+                    <!--<th>编号</th>-->
+                    <th>用户名</th>
+                    <th>联系电话</th>
+                    <th>用户角色</th>
+                    <th>状态</th>
+                    <th>最近登录时间</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left" width="5%">{{$index+1}}</td>
+                    <!--<td>{{data.id}}</td>-->
+                    <td  nowrap width="10%">{{data.username}}</td>
+                    <td  nowrap width="15%">{{data.phone | formatPhoneNum}}</td>
+                    <td  nowrap width="25%"><p>{{data.roleName | eachPrc}}</p></td>
+                    <td  nowrap  width="10%">
+                        <span data-ng-if="data.manageState==1">启用</span>
+                        <span data-ng-if="data.manageState==0">禁用</span>
+                    </td>
+                    <td  nowrap width="15%">
+                        {{data.lastLoginTime}}
+                    </td>
+                    <td class="text-right" nowrap width="15%">
+                        <div class="buttons" style="min-width: 200px;">
+                            <a class="btn btn-sm btn-primary" ui-sref="app.system.createUser({id: data.id})">编辑</a>
+                            <a class="btn btn-sm btn-warning" data-ng-if="data.manageState==1" data-ng-click="vm.freezeFunc(data.id)">禁用</a>
+                            <a class="btn btn-sm btn-warning" data-ng-if="data.manageState==0" data-ng-click="vm.enableFunc(data.id)">启用</a>
+                            <a class="btn btn-sm btn-danger" data-ng-click="vm.resetPass(data.id)">重置密码</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

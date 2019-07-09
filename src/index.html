@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn" data-ng-app="app" ng-controller="AppCtrl">
+<head>
+    <meta charset="utf-8" />
+    <title data-ng-bind="app.name"></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" >-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" >
+    <!-- build:css css/index.min.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-custom-width.css">
+    <link rel="stylesheet" href="bower_components/angular-chosen/chosen.css">
+    <link rel="stylesheet" href="bower_components/jedate/jedate.css">
+    <link rel="stylesheet" href="bower_components/jquery.ztree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/all.css">
+    <!-- 时间日期选择插件 -->
+    <link rel="stylesheet" href="bower_components/datetimepicker/jquery-ui.min.css">
+    <link rel="stylesheet" href="bower_components/datetimepicker/jquery-ui-timepicker-addon.min.css">
+    <!-- endbuild -->
+</head>
+<body>
+<div class="app" id="app" ng-class="{
+    'app-header-fixed':app.settings.headerFixed,
+    'app-aside-fixed':app.settings.asideFixed,
+    'app-aside-folded':app.settings.asideFolded,
+    'app-aside-dock':app.settings.asideDock,
+    'container':app.settings.container}" ui-view>
+</div>
+
+<!-- build:js  js/lib.js-->
+<!-- jQuery -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Angular -->
+<script src="bower_components/angular/angular.js"></script>
+<!-- endbuild -->
+
+<!-- build:js  js/tool.js-->
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+
+<!-- bootstrap -->
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!-- lazyload -->
+<script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+
+<!-- translate -->
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+<!-- endbuild -->
+
+<!-- build:js  js/plugins.js-->
+<script src="js/base/particles.min.js"></script>
+<script src="bower_components/jquery.ztree/jquery.ztree.all-3.5.min.js"></script>
+<!-- plugins -->
+<script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
+<script src="bower_components/angular-chosen/chosen.jquery.min.js"></script>
+<script src="bower_components/angular-chosen/angular-chosen.js"></script>
+<script src="bower_components/screenfull/dist/screenfull.min.js"></script>
+<script src="bower_components/jedate/jedate.js"></script>
+<script src="bower_components/datetimepicker/jquery-ui.min.js"></script>
+<script src="bower_components/datetimepicker/jquery-ui-timepicker-addon.min.js"></script>
+<script src="bower_components/datetimepicker/jquery-ui-sliderAccess.js"></script>
+<!-- endbuild -->
+
+<script src="http://api.map.baidu.com/api?v=2.0&ak=BriDmV4VWIBGg9CEDeDlwG0GUIzhmK1N"></script>
+
+<!-- build:js  js/app.js-->
+<!-- config -->
+<script src="js/base/app.js"></script>
+<script src="js/base/webServer.js"></script>
+<script src="js/base/constants.js"></script>
+<script src="js/base/config.js"></script>
+<script src="js/base/template.js"></script>
+<script src="js/base/configInterceptor.js"></script>
+<script src="js/base/configRouter.js"></script>
+
+<!-- services -->
+<script src="js/services/common/commonService.js"></script>
+<script src="js/services/common/qiniuService.js"></script>
+<script src="js/services/common/modelService.js"></script>
+<script src="js/services/common/httpService.js"></script>
+<script src="js/services/common/httpInterceptor.js"></script>
+<script src="js/services/common/validateService.js"></script>
+<script src="js/services/common/getMenu.js"></script>
+<script src="js/services/common/ui-load.js"></script>
+<script src="js/services/region.js"></script>
+<script src="js/services/qiniu.js"></script>
+<script src="js/services/shop.js"></script>
+<script src="js/services/station.js"></script>
+<script src="js/services/version.js"></script>
+<script src="js/services/login.js"></script>
+<script src="js/services/userManage.js"></script>
+<script src="js/services/adminSet.js"></script>
+<script src="js/services/asset.js"></script>
+<script src="js/services/menu.js"></script>
+<!-- filters -->
+<script src="js/filters/filters.js"></script>
+<script src="js/filters/props.js"></script>
+
+<!-- directives -->
+<script src="js/directives/setnganimate.js"></script>
+<script src="js/directives/ui-butterbar.js"></script>
+<script src="js/directives/ui-focus.js"></script>
+<script src="js/directives/ui-fullscreen.js"></script>
+<script src="js/directives/ui-jq.js"></script>
+<script src="js/directives/ui-toggleclass.js"></script>
+<script src="js/directives/ui-module.js"></script>
+<script src="js/directives/ui-nav.js"></script>
+<script src="js/directives/ui-scroll.js"></script>
+
+<script src="js/directives/page.js"></script>
+<script src="js/directives/directives.js"></script>
+<script src="js/directives/pageData.js"></script>
+<script src="js/directives/02-datePick/datePick.js"></script>
+<script src="js/directives/ztree.js"></script>
+<script src="js/base/index.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

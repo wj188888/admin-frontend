@@ -1,0 +1,32 @@
+<div class="asset-dialog">
+    <div class="ticket-dialog">
+        <span class="close-icon" data-ng-click="vm.cancleFunc()"></span>
+        <h2>上架跟进</h2>
+    </div>
+
+    <div class="text-content pad-l-20 pad-r-20 font-size-14">
+        <p class="pad-0">企业提交的版本上架任务的初始状态即为待上架，当连接运营人员完成版本上架工作后，可将状态置为已上架，表示本次任务已经完成。状态不支持回滚操作。</p>
+        <div class="radio_box">
+            <div class="radio_center">
+                <input type="radio" name="shelves" data-ng-value="'0'"
+                       data-ng-model="vm.shelves"> <span class="f-c-999 f-s-12">待上架</span>
+            </div>
+            <div class="radio_center">
+                <input type="radio" name="shelves" data-ng-value="'1'"
+                       data-ng-model="vm.shelves"> <span class="f-c-999 f-s-12">已上架</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="ticket-operator">
+        <div class="mid clearfix">
+            <a class="btn w-xs btn-default"
+               data-ng-click="vm.cancleFunc()">取消</a>
+            <a class="btn w-xs btn-info"
+               data-ng-click="vm.confirmFunc()">确定</a>
+        </div>
+    </div>
+</div>

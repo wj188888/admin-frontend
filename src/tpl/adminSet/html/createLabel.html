@@ -1,0 +1,54 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">设置-创建/编辑标签</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请认真填写标签信息</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">标签类型：</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline i-checks">
+                                <input data-ng-model="vm.labelData.type" type="radio" value="0">
+                                <i></i>
+                                平台认证
+                            </label>
+                            <label class="checkbox-inline i-checks">
+                                <input type="radio" data-ng-model="vm.labelData.type"  value="1">
+                                <i></i>
+                                车辆认证
+                            </label>
+                            <label class="checkbox-inline i-checks">
+                                <input type="radio" data-ng-model="vm.labelData.type"  value="2">
+                                <i></i>
+                                司机认证
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">标签名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="labelName" data-ng-model="vm.labelData.labelName" class="form-control m-b" placeholder="请输入标签名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">内容：</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="6" id="labelContent" data-ng-model="vm.labelData.labelContent"  placeholder="请输入内容"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createLabelSave()">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

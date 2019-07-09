@@ -1,0 +1,91 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">支付渠道</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <ul class="asset-naval pad-l-0">
+                <li class="wd2">
+                    <p>总佣金</p>
+                    <p><span class="orange">{{vm.channelData.totalCommission | number:2}}</span><i>元</i></p>
+                </li>
+                <li class="wd2">
+                    <p>已付佣金</p>
+                    <p><span class="orange">{{vm.channelData.payedCommission | number:2}}</span><i>元</i></p>
+                </li>
+                <li class="wd2 relative">
+                    <p>未付佣金</p>
+                    <p><span class="orange">{{vm.channelData.unPayCommission | number:2}}</span><i>元</i></p>
+                </li>
+            </ul>
+            <div class="filter-condition clearfix pad-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>月份：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.date"  class="inp larger"/>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>支付渠道：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.payType"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table mg-top-15">
+                <thead>
+                <tr>
+                    <th class="text-left">月份</th>
+                    <th>公司名称</th>
+                    <th>平台名称</th>
+                    <th>所在城市</th>
+                    <th>支付渠道</th>
+                    <th>本月佣金</th>
+                    <th>未付佣金</th>
+                    <th>已付佣金</th>
+                    <th>已付笔数</th>
+                    <th>付款人</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left">{{data.unPayMonth}}</td>
+                    <td>{{data.firmName}}</td>
+                    <td>{{data.storeName}}</td>
+                    <td>{{data.city}}</td>
+                    <td>
+                        <span data-ng-if="data.payAccount==0">连接官方</span>
+                        <span data-ng-if="data.payAccount">企业自身</span>
+                    </td>
+                    <td>{{data.totalCommission | number:2}}</td>
+                    <td>{{data.unPayCommission | number:2}}</td>
+                    <td>{{data.payedCommission | number:2}}</td>
+                    <td>{{data.payedTimes}}</td>
+                    <td>{{data.updatedBy}}</td>
+                    <td class="text-right">
+                        <div class="buttons">
+                        <!--<a class="btn btn-sm btn-info" data-ng-click="vm.paySure(data.id,data.date)">付款确认</a>-->
+                            <a class="btn btn-sm btn-warning" ui-sref="app.assetManage.accountDetail({id: data.id})">对账单</a>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

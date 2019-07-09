@@ -1,0 +1,188 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">车站列表-{{vm.text}}车站</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请认真填写车站信息</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">是否可退票：</label>
+                        <div class="col-sm-9 m-b">
+                            <label class="checkbox-inline i-checks">
+                                <input data-ng-model="vm.Station.canReturn" type="radio" value="0">
+                                <i></i>
+                                不能
+                            </label>
+                            <label class="checkbox-inline i-checks">
+                                <input type="radio" data-ng-model="vm.Station.canReturn"  value="1">
+                                <i></i>
+                                能
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">客运站名称：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="station" data-ng-model="vm.Station.name" class="form-control m-b" placeholder="请输入客运站名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">车站所对应的平台：</label>
+                        <div class="col-sm-9">
+                            <select class="input-sm form-control inline v-middle m-r m-b"
+                                    id="platId"
+                                    data-ng-model="vm.Station.storeId"
+                                    data-ng-options="x.id as x.firmFullName for x in vm.plats">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">地理位置：</label>
+                        <div class="col-sm-3">
+                            <select id="stationProvince" class="form-control m-b"
+                                    data-ng-model="vm.Station.province.id" chosen
+                                    data-ng-options="Province.id as Province.alias for Province in vm.positionStation['stationProvince']"
+                                    data-ng-change="vm.findSubRegions('positionStation', 'stationCity', vm.Station.province.id)">
+                                <option value="">省</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select id="stationCity" class="form-control m-b"
+                                    data-ng-model="vm.Station.city.id" chosen
+                                    data-ng-options="City.id as City.alias for City in vm.positionStation['stationCity']"
+                                    data-ng-change="vm.findSubRegions('positionStation', 'stationCounty', vm.Station.city.id)">
+                                <option value="">市</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select id="stationCounty" class="form-control m-b"
+                                    data-ng-model="vm.Station.county.id" chosen
+                                    data-ng-options="County.id as County.name for County in vm.positionStation['stationCounty']">
+                                <option value="">区</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">详细地址：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="detail" data-ng-model="vm.Station.address" class="form-control m-b" placeholder="请输入详细地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系人姓名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="name" data-ng-model="vm.Station.contactName" class="form-control m-b" placeholder="请输入联系人姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">联系电话：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="phone" data-ng-model="vm.Station.contactPhone" class="form-control m-b" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">票据查询详情接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="ticketDetailApi" data-ng-model="vm.Station.ticketDetailApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">获取出发的城市列表url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="cityStartUpListAPI" data-ng-model="vm.Station.cityStartUpListAPI" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">确认退费信息url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="confirmRefundAPI" data-ng-model="vm.Station.confirmRefundAPI" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">退款信息接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="refundListAPI" data-ng-model="vm.Station.refundListAPI" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                        <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                        <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createStation()">保存</button>
+                            </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">确认订单接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="confirmOrderApi" data-ng-model="vm.Station.confirmOrderApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">查询班次接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="queryApi" data-ng-model="vm.Station.queryApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">下单接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="applyOrderApi" data-ng-model="vm.Station.applyOrderApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">线路url ：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="cityLineRegionApi" data-ng-model="vm.Station.cityLineRegionApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">取消订单接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="cancelOrderApi" data-ng-model="vm.Station.cancelOrderApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">退票接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="returnTicketApi" data-ng-model="vm.Station.returnTicketApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">获取城市线路列表url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="cityLineListAPI" data-ng-model="vm.Station.cityLineListAPI" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">班次查询详情接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="detailApi" data-ng-model="vm.Station.detailApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">订单查询详情接口url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="orderDetailApi" data-ng-model="vm.Station.orderDetailApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">出发城市url：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="cityStartupRegionApi" data-ng-model="vm.Station.cityStartupRegionApi" class="form-control m-b" placeholder="请输入url">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

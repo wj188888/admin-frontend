@@ -1,0 +1,62 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">发票概况</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="block-head">
+                <span class="blue-border"></span>
+                <span class="title">发票概况</span>
+            </div>
+            <div class="general-statistical mg-top-15 clearfix">
+                <ul class="pull-left">
+                    <li class="w25">
+                        <p class="number">{{vm.statisticData.makeInvoiceAllAmount | number: 2}}</p>
+                        <p class="title">累计已开发票总金额（元）</p>
+                    </li>
+                    <li class="w25">
+                        <p class="number">{{vm.statisticData.receiveAllAmount | number: 2}}</p>
+                        <p class="title">累计收到发票总金额（元）</p>
+                    </li>
+                    <li class="w25">
+                        <p class="number">{{vm.statisticData.makeInvoiceAllNum}}</p>
+                        <p class="title">累计已开发票数（笔）</p>
+                    </li>
+                    <li class="w25">
+                        <p class="number">{{vm.statisticData.receiveAllNum}}</p>
+                        <p class="title">累计收到发票数（笔）</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="block-head">
+                <span class="orange-border"></span>
+                <span class="title">月度发票额</span>
+            </div>
+            <div class="detail-table">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>{{vm.nowMonth}}</td>
+                        <td class="back-gray">金额（元）</td>
+                        <td class="back-gray">数量（笔）</td>
+                        <td class="back-gray">操作</td>
+                    </tr>
+                    <tr>
+                        <td class="back-gray">需对外开票</td>
+                        <td class="blue-word">{{vm.statisticData.makeInvoiceAmount | number: 2}}</td>
+                        <td class="blue-word">{{vm.statisticData.makeInvoiceNum}}</td>
+                        <td><a class="btn btn-sm btn-info"
+                               ui-sref="app.assetManage.makeInvoiceList">对外开票</a></td>
+                    </tr>
+                    <!--<tr>
+                        <td class="back-gray">可索取发票</td>
+                        <td class="blue-word">{{vm.statisticData.askInvoiceAmount}}</td>
+                        <td class="blue-word">{{vm.statisticData.askInvoiceNum}}</td>
+                        <td>-</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

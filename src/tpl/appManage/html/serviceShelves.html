@@ -1,0 +1,132 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">发布管理</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+
+        <div class="wrapper">
+            <div class="filter-condition clearfix p-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>平台名称：</label>
+                            <input placeholder="请输入平台名称"
+                                   data-ng-model="search.brandName"
+                                   type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group">
+                            <label>申请状态：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.status"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <label>联系信息：</label>
+                            <input placeholder="请输入联系人姓名/电话"
+                                   data-ng-model="search.phoneName"
+                                   type="text"
+                                   class="inp larger"/>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly"
+                                   date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.applyStartTime"
+                                   class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly"
+                                   date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.applyStopTime"
+                                   class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>版本类型：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.os"
+                                    data-ng-options="x.value as x.key for x in vm.textTypes">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">
+                                清空条件
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-left">平台名称</th>
+                        <th>发布版本</th>
+                        <th>app名称</th>
+                        <th>联系信息</th>
+                        <th>申请时间</th>
+                        <th>状态</th>
+                        <th>上架时间</th>
+                        <th class="text-right">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="releaseInfoList in releaseInfoLists">
+                        <!--平台名称-->
+                        <td class="text-left">
+                            <span>{{releaseInfoList.brandName?releaseInfoList.brandName:'-'}}</span>
+                        </td>
+                        <!--发布版本-->
+                        <td>
+                            <span data-ng-if="releaseInfoList.os == 0">Android</span>
+                            <span data-ng-if="releaseInfoList.os == 1">iOS</span>
+                            <span data-ng-if="releaseInfoList.os == null && releaseInfoList.os == ''">-</span>
+                            <span>{{releaseInfoList.versionNumber1}}.{{releaseInfoList.versionNumber2}}.{{releaseInfoList.versionNumber3}}</span>
+                            <a class="mar-l-10" style="color: #337ab7"
+                               data-ng-show="releaseInfoList.remark"
+                               data-ng-click="vm.openExplain(releaseInfoList)">版本说明</a>
+                        </td>
+                        <!--app名称-->
+                        <td>
+                            <span>{{releaseInfoList.appName?releaseInfoList.appName:'-'}}</span>
+                        </td>
+                        <!--联系信息-->
+                        <td>
+                            <p>{{releaseInfoList.contactName?releaseInfoList.contactName:'-'}}</p>
+                            <p>{{releaseInfoList.telephone}}</p>
+                        </td>
+                        <!--申请时间-->
+                        <td>
+                            <span>{{releaseInfoList.releaseApplyTime?releaseInfoList.releaseApplyTime:'-'}}</span>
+                        </td>
+                        <!--状态-->
+                        <td>
+                            <span data-ng-if="releaseInfoList.status == 0 ">待上架</span>
+                            <span data-ng-if="releaseInfoList.status == 1 ">已上架</span>
+                            <span data-ng-if="releaseInfoList.status  == null && releaseInfoList.status  == ''">-</span>
+                        </td>
+                        <!--上架时间-->
+                        <td>
+                            <span>{{releaseInfoList.releaseOfficialTime?releaseInfoList.releaseOfficialTime:'-'}}</span>
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-info"
+                               data-ng-if="releaseInfoList.status == 0"
+                               data-ng-click="vm.openDialog(releaseInfoList)">跟进</a>
+                            <a class="mar-r-20" data-ng-if="releaseInfoList.status == 1">-</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+
+    </div>
+</div>

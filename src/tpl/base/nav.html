@@ -1,0 +1,36 @@
+<ul class="nav" data-ng-repeat="menu in menus">
+    <!--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs"></li>-->
+    <li ng-class="{active:$state.includes(menu.menu_path)}">
+        <a class="auto pd first-nav">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <!--<b class="badge bg-info pull-right">3</b>-->
+            <i class="{{menu.icon}}"></i>
+            <span data-ng-bind="menu.menu_name"></span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li ui-sref-active="active" data-ng-repeat="childmenu in menu.childMenu">
+                <a ui-sref="{{childmenu.menu_path}}">
+                    <span data-ng-bind="childmenu.menu_name"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="line dk hidden-folded"></li>
+</ul>
+
+<div class="sidebar-user-box">
+    <span class="user-name"></span>
+    <!--<span class="user-arrow"></span>-->
+    <div class="user-dropdown">
+        <div class="user-dropdown-meta">
+            <div >{{showUserName}}</div>
+        </div>
+        <div class="user-dropdown-select">
+            <a data-ng-click="logout()">退出</a>
+        </div>
+        <div class="jt"></div>
+    </div>
+</div>

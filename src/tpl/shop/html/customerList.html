@@ -1,0 +1,130 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">客户列表</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>注册时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.startDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>联系电话：</label>
+                            <input id="number" placeholder="请输入联系电话" data-ng-model="search.phone" type="text"
+                                   class="inp larger"/>
+                        </div>
+
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>联系人：</label>
+                            <input placeholder="请输入联系人"
+                                   data-ng-model="search.name" type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+
+                    <th class="text-left">联系人</th>
+                    <th>
+                        <div style="width: 100%;cursor: pointer"
+                             data-ng-click="setSort('createdTime')" >
+                            注册时间
+                            <i data-ng-hide="sortItem.createdTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                            <i data-ng-show="sortItem.createdTime.sortType == 'ASC'&&sortItem.createdTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-active"></i>
+                            </i>
+                            <i data-ng-show="sortItem.createdTime.sortType == 'DESC'&&sortItem.createdTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-active"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                        </div>
+                    </th>
+                    <th>联系电话</th>
+                    <th>
+                        <div style="width: 100%;cursor: pointer"
+                             data-ng-click="setSort('lastLoginTime')" >
+                            最近登录
+                            <i data-ng-hide="sortItem.lastLoginTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                            <i data-ng-show="sortItem.lastLoginTime.sortType == 'ASC'&&sortItem.lastLoginTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-active"></i>
+                            </i>
+                            <i data-ng-show="sortItem.lastLoginTime.sortType == 'DESC'&&sortItem.lastLoginTime.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-active"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                        </div>
+                    </th>
+                    <th>
+                        店铺数量
+                    </th>
+                    <th>
+                        <div style="width: 100%;cursor: pointer"
+                             data-ng-click="setSort('loginTimes')" >
+                            登录次数
+                            <i data-ng-hide="sortItem.loginTimes.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                            <i data-ng-show="sortItem.loginTimes.sortType == 'ASC'&&sortItem.loginTimes.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-unactive"></i>
+                                <i class="icon-statistics-down-active"></i>
+                            </i>
+                            <i data-ng-show="sortItem.loginTimes.sortType == 'DESC'&&sortItem.loginTimes.selected" class="statistics-up-down">
+                                <i class="icon-statistics-up-active"></i>
+                                <i class="icon-statistics-down-unactive"></i>
+                            </i>
+                        </div>
+                    </th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left" width="15%">{{data.name}}</td>
+                    <td width="15%">{{data.createdTime}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.lastLoginTime?data.lastLoginTime:'-'}}</td>
+                    <td>{{data.storeNum}}</td>
+                    <td>
+                        {{data.loginTimes}}
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a ui-sref="app.shop.customerDetail({id:data.id})"
+                               class="btn btn-sm btn-info">详情</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

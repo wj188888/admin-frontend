@@ -1,0 +1,85 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">对外开票</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <ul class="fourth-nav clearfix">
+                <li class="bd-lf bd-top" ui-sref="app.assetManage.makeInvoiceList">开票申请</li>
+                <li class="bd-lf bd-top bd-rt active" >
+                    开票记录
+                </li>
+            </ul>
+            <div class="filter-condition mg-top-15 clearfix">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>申请方：</label>
+                            <input data-ng-model="search.firmName" placeholder="请输入申请方" type="text" class="inp larger" maxlength="30"/>
+                        </div>
+                        <div class="group">
+                            <label>当前状态：</label>
+                            <!--* 发票状态 1审核中2已驳回3待邮寄4已邮寄5已确认6未收到7已收到 ,-->
+                            <select class="inp larger" data-ng-model="search.status"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.staDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table mg-top-15">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>申请方</th>
+                    <th>所在地</th>
+                    <th>平台性质</th>
+                    <th>申请时间</th>
+                    <th>开票金额</th>
+                    <th>发票号码</th>
+                    <th>发票类型</th>
+                    <th>开票时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td>{{$index+1}}</td>
+                    <td data-ng-if="data.companyName">{{data.companyName}}</td>
+                    <td data-ng-if="!data.companyName">无</td>
+                    <td data-ng-if="data.recipientCity">{{data.recipientCity}}</td>
+                    <td data-ng-if="!data.recipientCity">无</td>
+                    <td data-ng-if="data.invoicePlatformType == 0">企业</td>
+                    <td data-ng-if="data.invoicePlatformType == 1">个人</td>
+                    <td class="wd100">{{data.createdTime}} </td>
+                    <td>￥{{data.amount | number: 2}}</td>
+                    <td data-ng-if="data.invoiceNo">{{data.invoiceNo}}</td>
+                    <td data-ng-if="!data.invoiceNo">无</td>
+                    <td data-ng-if="data.invoiceType">
+                        <span data-ng-if="data.invoiceType == 0">电子发票</span>
+                        <span data-ng-if="data.invoiceType == 1">纸质发票</span>
+                    </td>
+                    <td data-ng-if="!data.invoiceType">无</td>
+                    <td data-ng-if="data.invoiceTime">{{data.invoiceTime}}</td>
+                    <td data-ng-if="!data.invoiceTime">无</td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

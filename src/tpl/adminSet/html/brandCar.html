@@ -1,0 +1,113 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">品牌约车计费标准</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix p-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>城市选择：</label>
+                            <select class="inp small"
+                                    data-ng-model="vm.bindData.provinceId" chosen
+                                    data-ng-options="Province.id as Province.alias for Province in vm.commonName['province']"
+                                    data-ng-change="vm.findSubRegions('commonName', 'city', vm.bindData.provinceId)">
+                                <option value="">省</option>
+                            </select>
+                            <select class="inp small mar-l-10"
+                                    data-ng-model="vm.bindData.cityId" chosen
+                                    data-ng-options="City.id as City.alias for City in vm.commonName['city']"
+                                    data-ng-change="vm.findSubRegions('commonName', 'county', vm.bindData.cityId)">
+                                <option value="">市</option>
+                            </select>
+                        </div>
+                        <!--<div class="group">
+                            <label>车型筛选：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.carGrade"
+                                    data-ng-options="x.value as x.key for x in vm.carTypes">
+                                <option value="">&#45;&#45;请选择&#45;&#45;</option>
+                            </select>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="con-bottom clearfix">
+                    <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                    <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                </div>
+            </div>
+        </div>
+        <div class="m-l">
+            <button class="btn btn-sm btn-info" ui-sref="app.adminSet.addRule">添加规则</button>
+        </div>
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-left" nowrap>序号</th>
+                    <th>城市</th>
+                    <th colspan="7">
+                        <table class="table mar-0">
+                            <thead>
+                            <tr class="border-0">
+                                <th class="w-7">车型</th>
+                                <th class="w-7">起步价</th>
+                                <th class="w-7">最低消费</th>
+                                <th class="w-7">时长费</th>
+                                <th class="w-7">里程费</th>
+                                <th class="w-7">远途费</th>
+                                <th class="w-7">夜间费</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList track by $index">
+                    <td class="text-left" rowspan="data.chargingRuleItems.length">{{$index+1}}</td>
+                    <td rowspan="data.chargingRuleItems.length">
+
+                        {{data.province}}{{data.type==1?'':'-'+data.city}}
+                    </td>
+                    <td colspan="7" style="padding:0;">
+                            <table class="table table-no-border">
+                                <tbody>
+                                    <tr data-ng-repeat="rule in data.chargingRuleItems track by $index">
+                                        <td class="w-7">
+                                            <span data-ng-if="rule.carGrade==0">5座经济轿车</span>
+                                            <span data-ng-if="rule.carGrade==1">5座高级轿车</span>
+                                            <span data-ng-if="rule.carGrade==2">7座商务</span>
+                                            <span data-ng-if="rule.carGrade==3">经济SUV</span>
+                                            <span data-ng-if="rule.carGrade==4">高级SUV</span>
+                                            <span data-ng-if="rule.carGrade==5">小巴</span>
+                                            <span data-ng-if="rule.carGrade==6">中巴</span>
+                                            <span data-ng-if="rule.carGrade==7">大巴</span>
+                                        </td>
+                                        <td class="w-7">{{rule.startupFee}}</td>
+                                        <td class="w-7">{{rule.minConsumptionAmount}}</td>
+                                        <td class="w-7">{{rule.durationFee}}</td>
+                                        <td class="w-7">{{rule.mileageFee}}</td>
+                                        <td class="w-7">{{rule.longJourneyFee}}</td>
+                                        <td class="w-7">{{rule.nightFee }}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                   </td>
+                    <td class="text-right">
+                        <a class="btn btn-sm btn-primary" ui-sref="app.adminSet.addRule({id: data.id})">编辑</a>
+                        <a class="btn btn-sm btn-warning"
+                           data-ng-show="data.type != 1"
+                           data-ng-click="vm.deleteCityPrice(data.id)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+
+    </div>
+</div>

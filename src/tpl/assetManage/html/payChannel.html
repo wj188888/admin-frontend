@@ -1,0 +1,102 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">支付渠道</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix pad-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>创建时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.createTimeStart"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.createTimeEnd" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>公司名称：</label>
+                            <input id="number" placeholder="请输入公司名称" data-ng-model="search.firmName " type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group">
+                            <label>所在城市：</label>
+                            <input id="city" placeholder="请输入所在城市" data-ng-model="search.city" type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>修改时间：</label>
+                            <input id="fromTime" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.updateTimeStart"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="toTime" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.updateTimeEnd" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>平台名称：</label>
+                            <input id="platform" placeholder="请输入平台名称" data-ng-model="search.storeName" type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group">
+                            <label>支付渠道：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.payType"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table mg-top-15">
+                <thead>
+                <tr>
+                    <th class="text-left">公司名称</th>
+                    <th>平台名称</th>
+                    <th>所在城市</th>
+                    <th>支付渠道</th>
+                    <th>未付佣金</th>
+                    <th>未付日期</th>
+                    <th>创建人</th>
+                    <th>最后操作人</th>
+                    <th>创建日期</th>
+                    <th>最近更新日期</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left">{{data.firmName}}</td>
+                    <td>{{data.storeName}}</td>
+                    <td>{{data.city}}</td>
+                    <td>
+                        <span data-ng-if="data.payAccountConfig.payType==0">连接官方</span>
+                        <span data-ng-if="data.payAccountConfig.payType==1">企业自身</span>
+                    </td>
+                    <td>{{data.unPayCommission}}</td>
+                    <td>{{data.unPayMonth}}</td>
+                    <td>{{data.createdBy}}</td>
+                    <td>{{data.updatedBy}}</td>
+                    <td>{{data.createdTime}}</td>
+                    <td>{{data.updatedTime}}</td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a class="btn btn-sm btn-danger" data-ng-click="vm.changeChannel(data.id)">切换渠道</a>
+                            <a class="btn btn-sm btn-info" ui-sref="app.assetManage.payChannelDetail({id: data.id})">详情</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

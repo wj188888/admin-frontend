@@ -1,0 +1,103 @@
+<div class="app">
+    <div class="app-inner clearfix">
+        <div class="page-controller buy-box customer-detail" style="margin-bottom: 24px;" id="container">
+
+            <div class="form-container clearfix">
+                <div class="form-inline group-small mar-t-30">
+                    <label>注册人：</label>
+                        <label class="text-left">{{vm.customerData.name}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>联系电话：</label>
+                    <label class="text-left">{{vm.customerData.phone}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>注册时间：</label>
+                    <label class="text-left">{{vm.customerData.createdTime}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>店铺数：</label>
+                    <label class="text-left">{{vm.customerData.storeNum}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>累计登陆：</label>
+                    <label class="text-left">{{vm.customerData.loginTimes}}</label>
+                </div>
+
+            </div>
+
+            <div class="form-container clearfix" data-ng-repeat="item in vm.customerData.stores">
+                <div class="form-inline relative mar-t-30" style="height:81px;">
+                    <label style="margin-top:20px;">平台商标：</label>
+                    <div class="logo">
+                        <img class="customerData-img" ng-src="{{item.logo || 'img/favicon.png'}}" alt="">
+                    </div>
+
+                </div>
+                <div class="form-inline group-small">
+                    <label>平台名称：</label>
+                    <label class="text-left">{{item.brandName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>公司名称：</label>
+                    <label class="text-left">{{item.firmFullName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>注册地址：</label>
+                    <label class="text-left">
+                        {{item.firmProvince.name+'-'+item.firmCity.name+'-'+item.firmCounty.name+'-'+item.firmAddress}}
+                    </label>
+                </div>
+                <div class="form-inline group-small" data-ng-if="item.type != 1">
+                    <label>法人代表：</label>
+                    <label class="text-left">{{item.legalPerson}}</label>
+                </div>
+                <div class="form-inline group-small"  data-ng-if="item.type != 1">
+                    <label>企业类别：</label>
+                    <label class="text-left">{{item.firmTypeName}}</label>
+                </div>
+                <div class="form-inline group-small"  data-ng-if="item.type != 1">
+                    <label>隶属行业：</label>
+                    <label class="text-left">{{item.firmClassName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>企业类型：</label>
+                    <label class="text-left">{{item.typeName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>认证状态：</label>
+                    <span class="button-tab tab-gray" data-ng-if="item.status==0">未认证</span>
+                    <span class="button-tab tab-green" data-ng-if="item.status!=0">已认证</span>
+                    <span class="button-tab tab-blue">{{item.type == 1?'个人平台':'企业平台'}}</span>
+                    <span class="button-tab tab-red">1年</span>
+                </div>
+                <div class="form-inline group-small">
+                    <label>创建时间：</label>
+                    <label class="text-left">{{item.createdTime}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>认证期效：</label>
+                    <label class="text-left" data-ng-if="item.status==1">
+                        还有<span>{{item.diffDay}}</span>天到期
+                        &nbsp;&nbsp;&nbsp;
+                        {{item.qualificationTime.slice(0,10)}}——{{item.endDate.slice(0,10)}}
+                    </label>
+                    <label class="text-left" data-ng-if="item.status!=1">
+                        -
+                    </label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>运营负责人：</label>
+                    <label class="text-left">{{item.managerName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>联系电话：</label>
+                    <label class="text-left">{{item.managerTelephone}}</label>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

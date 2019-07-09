@@ -1,0 +1,88 @@
+<div class="bg-light lter b-b wrapper">
+    <div class="third-sidebar-box">
+        <ul class="clearfix">
+            <li>
+                <a  ui-sref="app.shop.bankVerify">查看列表</a>
+            </li>
+            <li>
+                <a class="active">申请列表</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix p-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.staDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>申请方&nbsp;&nbsp;：</label>
+                            <input id="number" placeholder="请输入申请方" data-ng-model="search.brandName" type="text"
+                                   class="inp larger"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="con-bottom clearfix">
+                    <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                    <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper mg-top-15">
+            <table class="table table-bordered table-hover table-condensed bg-white-only">
+                <thead>
+                <tr>
+                    <!--<th>序号</th>-->
+                    <th class="text-left">认证申请方</th>
+                    <th>开户行</th>
+                    <th>银行账户</th>
+                    <th>申请时间</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>打款金额</th>
+                    <th>认证金额</th>
+                    <th>状态</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in options.dataList">
+                    <!--<td>{{$index+1}}</td>-->
+                    <td class="text-left">{{item.brandName}}</td>
+                    <td>{{item.bankCard.bankDept}}</td>
+                    <td>{{item.bankCard.no}}</td>
+                    <td>{{item.applyTime}}</td>
+                    <td>{{item.bankCard.name}}</td>
+                    <td>{{item.bankCard.phone }}</td>
+                    <td>{{item.inputValidateMoney}}</td>
+                    <td>{{item.validateFee}}</td>
+                    <td>
+                        <span ng-if="item.bankCard.status==0">未认证</span>
+                        <span ng-if="item.bankCard.status==1">认证中</span>
+                        <span ng-if="item.bankCard.status==2">已认证</span>
+                        <span ng-if="item.bankCard.status==3">认证失败</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons">
+                            <a class="btn btn-sm btn-info" data-ng-if="item.bankCard.status==0" data-ng-click="vm.dealBankCard(item.id)">处理</a>
+                            <a class="btn btn-sm  btn-default" data-ng-if="item.bankCard.status==1||item.bankCard.status==2||item.bankCard.status==3">处理</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

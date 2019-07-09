@@ -1,0 +1,176 @@
+<!--<div class="bg-light lter b-b wrapper">-->
+    <!--<h1 class="m-n font-thin h3">司机认证</h1>-->
+<!--</div>-->
+<div class="app">
+    <div class="app-inner clearfix">
+        <div class="page-controller buy-box" style="margin-bottom: 24px;" id="container">
+            <ul class="fourth-nav clearfix mar-b-10">
+                <li class="bd-lf bd-top" data-ng-class="{'active':vm.driverRoleEnum == 'GENERAL', 'bd-rt': !vm.Driver.chRole&&!vm.Driver.taxiRole}" data-ng-click="vm.handleCategory('GENERAL')" data-ng-show="vm.Driver.generalRole">客运司机
+                </li>
+                 <li class="bd-lf bd-top" data-ng-class="{'active':vm.driverRoleEnum == 'CARHAILING', 'bd-rt': !vm.Driver.taxiRole}" data-ng-click="vm.handleCategory('CARHAILING')" data-ng-show="vm.Driver.chRole">网约司机
+                </li>
+                <li class="bd-lf bd-top bd-rt" data-ng-class="{'active':vm.driverRoleEnum == 'TAXI'}" data-ng-click="vm.handleCategory('TAXI')" data-ng-show="vm.Driver.taxiRole">出租司机
+                </li>
+                <!--<li class="bd-lf bd-top bd-rt" ui-sref="app.asset.statements.driverSettlement">司机结算</li>-->
+            </ul>
+            <div class="form-container clearfix">
+                <h2>基础信息</h2>
+                <div class="form-inline relative" style="height:81px;">
+                    <label style="margin-top:20px;">司机头像：</label>
+                    <img class="driver-img" ng-src="{{vm.Driver.avatar || 'img/driver/avatar.png'}}" alt="">
+                </div>
+                <div class="form-inline group-small">
+                    <label>司机姓名：</label>
+                    <label class="text-left">{{vm.Driver.firstName}}{{vm.Driver.lastName}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>司机手机号：</label>
+                    <label class="text-left">{{vm.Driver.phone}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>司机驾龄：</label>
+                    <label class="text-left">{{vm.Driver.driveAge}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>司机性别：</label>
+                    <label class="text-left">{{vm.Driver.sex == '0' ? '男' : '女'}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>司机民族：</label>
+                    <label class="text-left">{{vm.Driver.nationality}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>隶属关系：</label>
+                    <label class="text-left">{{vm.Driver.belongType | belongTypeCar}}</label>
+                </div>
+                <div class="form-inline group-small">
+                    <label>服务城市：</label>
+                    <label class="text-left">
+                        {{vm.Driver.serviceCity.province}}
+                        <span data-ng-show="vm.Driver.serviceCity.province&&vm.Driver.serviceCity.city">-</span>
+                        {{vm.Driver.serviceCity.city}}
+                        <span data-ng-show="vm.Driver.serviceCity.county&&vm.Driver.serviceCity.city">-</span>
+                        {{vm.Driver.serviceCity.county}}
+                    </label>
+                </div>
+            </div>
+
+            <!--详细信息-->
+            <div class="form-container clearfix">
+                <h2>认证管理</h2>
+                <!--身份证-->
+                <p class="form-inline-tit">身份证</p>
+                <div class="form-inline form-relative group-small">
+                    <label>身份证号：</label>
+                    <label class="text-left">{{vm.Driver.idCardCode}}</label>
+
+                </div>
+                <div class="form-inline form-auto-h clearfix">
+                    <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Driver.idCardImageList[0]}}"  data-ng-click="vm.img_show(vm.Driver.idCardImageList[0])" >
+                </div>
+                <!--驾驶证-->
+                <p class="form-inline-tit">驾驶证</p>
+                <div class="form-inline form-relative group-small">
+                    <label>驾驶证号：</label>
+                    <label class="text-left">{{vm.Driver.drivingLisenceCode}}</label>
+                </div>
+                <div class="form-select form-relative group-small">
+                    <label>驾驶类型：</label>
+                    <label class="text-left">{{vm.Driver.drivingLisenceType}}</label>
+                </div>
+                <div class="inline-error clearfix">
+                    <div class="form-inline form-relative group-small">
+                        <label>领证日期：</label>
+                        <label class="text-left">{{vm.Driver.getDrivingLisenceDate}}</label>
+                    </div>
+                    <div class="form-inline form-relative group-small">
+                        <label>
+                            有效期至：</label>
+                        <label class="text-left">{{vm.Driver.drivingLisenceValidDate}}</label>
+                    </div>
+                </div>
+                <div class="form-inline form-auto-h clearfix">
+                    <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Driver.drivingLisenceImageList[0]}}" data-ng-click="vm.img_show(vm.Driver.drivingLisenceImageList[0])" />
+                </div>
+
+                <!--客运从业资格证-->
+                <div data-ng-show="vm.driverRoleEnum == 'GENERAL'">
+                    <p class="form-inline-tit">客运从业资格证</p>
+                    <div class="form-inline form-relative group-small">
+                        <label>资格证号：</label>
+                        <label class="text-left">{{vm.Driver.generalRole.occupationalRequirementCode}}</label>
+                    </div>
+                    <div class="form-inline form-relative group-small">
+                        <label>有效期至：</label>
+                        <label class="text-left">{{vm.Driver.generalRole.occupationalRequirementValidDate}}</label>
+                    </div>
+                    <div class="form-inline form-auto-h mar-b-0 clearfix">
+                        <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Driver.generalRole.occupationalRequirementCodeImageList[0]}}" data-ng-click="vm.img_show(vm.Driver.generalRole.occupationalRequirementCodeImageList[0])" />
+                    </div>
+                </div>
+
+
+                <!--网约车从业资格证-->
+                <div data-ng-show="vm.driverRoleEnum == 'CARHAILING'">
+                    <p class="form-inline-tit">网约车从业资格证</p>
+                    <div class="form-inline form-relative">
+                        <label>资格证号：</label>
+                        <label class="text-left">{{vm.Driver.chRole.occupationalRequirementCode}}</label>
+                    </div>
+                    <div class="form-inline form-relative">
+                        <label>有效期至：</label>
+                        <label class="text-left">{{vm.Driver.chRole.occupationalRequirementValidDate}}</label>
+                    </div>
+                    <div class="form-inline form-auto-h mar-b-0 clearfix">
+                        <img class="upload-box upload-3-small mar-l-130 pull-left" src="{{vm.Driver.chRole.occupationalRequirementCodeImageList[0]}}" data-ng-click="vm.img_show( vm.Driver.chRole.occupationalRequirementCodeImageList[0])"/>
+                    </div>
+                </div>
+
+
+                <!--出租车从业资格证-->
+                <div data-ng-show="vm.driverRoleEnum == 'TAXI'">
+                    <p class="form-inline-tit">出租车从业资格证</p>
+                    <div class="form-inline form-relative">
+                        <label>
+                            
+                            资格证号：
+                        </label>
+                        <label class="text-left">{{vm.Driver.taxiRole.occupationalRequirementCode}}</label>
+                    </div>
+                    <div class="form-inline form-relative">
+                        <label>有效期至：</label>
+                        <label class="text-left">{{vm.Driver.taxiRole.occupationalRequirementValidDate}}</label>
+                    </div>
+                    <div class="form-inline form-auto-h mar-b-0 clearfix">
+                        <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Driver.taxiRole.occupationalRequirementCodeImageList[0] }}" data-ng-click="vm.img_show(vm.Driver.taxiRole.occupationalRequirementCodeImageList[0])"/>
+                    </div>
+
+
+                    <!--出租司机服务监督卡-->
+                    <p class="form-inline-tit">出租司机服务监督卡</p>
+                    <div class="form-inline form-relative">
+                        <label>监督卡号：</label>
+                        <label class="text-left">{{vm.Driver.taxiRole.serviceSuperviseCardCode}}</label>
+                    </div>
+                    <div class="form-inline form-relative">
+                        <label>有效期至：</label>
+                        <label class="text-left">{{vm.Driver.taxiRole.serviceSuperviseValidDate}}</label>
+                    </div>
+                    <div class="form-inline form-auto-h mar-b-0 clearfix">
+                        <img  class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Driver.taxiRole.serviceSuperviseCardImageList[0]}}" data-ng-click="vm.img_show( vm.Driver.taxiRole.serviceSuperviseCardImageList[0])"/>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="button-suspension" data-ng-show="vm.showSuspension == 6">
+        <a class="button button-small button-success inline" data-ng-click="vm.passApply()">
+            审核通过
+        </a>
+
+        <a class="button button-small button-success inline" data-ng-click="vm.rejectApply()">
+            驳回
+        </a>
+    </div>
+</div>
+</div>
+<div big-img-component img-show="imgShow" img="img"></div>

@@ -1,0 +1,52 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">用户管理-{{vm.text}}用户</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请认真填写用户信息</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用户名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="username" data-ng-model="vm.userData.username" class="form-control m-b" placeholder="请输入用户名">
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-show="vm.showPass">
+                        <label class="col-sm-3 control-label">密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" id="password" data-ng-model="vm.userData.password" class="form-control m-b" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">电话号码：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="phone" data-ng-model="vm.userData.phone" class="form-control m-b" placeholder="请输入电话号码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">角色：</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline i-checks" data-ng-repeat="data in vm.roleData">
+                                <input type="checkbox" id={{data.id}} name="{{data.roleName}}"
+                                       data-ng-checked="vm.isSelected(data.id,data.roleName)"
+                                       data-ng-click="vm.updateSelection($event,data.id,data.roleName)">
+                                <i></i>
+                                {{ data.roleName }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createUserSave()">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

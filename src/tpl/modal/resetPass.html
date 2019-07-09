@@ -1,0 +1,14 @@
+<div class="reset-dialog">
+    <div class="reset-item reset clearfix">
+        <label>新密码：</label>
+        <input id="pwd" type="password" data-ng-model="vm.password"/>
+    </div>
+    <div class="reset-item reset clearfix">
+        <label>确认密码：</label>
+        <input id="repwd" type="password" />
+    </div>
+    <div class="reset-item clearfix" style="text-align: center;margin-top: 20px;">
+        <a class="btn btn-sm btn-default" data-ng-click="vm.closeDialog()">取消</a>
+        <a class="btn btn-sm btn-info" data-ng-click="vm.resetFunc()">确认</a>
+    </div>
+</div>

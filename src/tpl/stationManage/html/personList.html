@@ -1,0 +1,85 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">验票员</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <div class="filter-condition clearfix p-b-20">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>创建时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.start"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.end" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>归属车站：</label>
+                            <input id="number" placeholder="请输入归属车站" data-ng-model="search.stationName" type="text"
+                                   class="inp larger"/>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>账号：</label>
+                            <input placeholder="请输入账号" data-ng-model="search.stationAccount" type="text"
+                                   class="inp larger"/>
+                        </div>
+                        <div class="group">
+                            <label>状态：</label>
+                            <select class="inp larger"
+                                    data-ng-model="search.status"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="con-bottom clearfix">
+                    <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                    <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                </div>
+            </div>
+        </div>
+        <div class="m-l m-r">
+            <button class="btn btn-sm btn-info" ui-sref="app.stationManage.createAccount">创建账号
+            </button>
+        </div>
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-left">账号</th>
+                    <th>归属车站</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left">{{data.username | formatPhoneNum}}</td>
+                    <td>{{data.stationName}}</td>
+                    <td>{{data.createdTime}}</td>
+                    <td>
+                        <span data-ng-if="data.userState=='ACTIVE'">正常</span>
+                        <span data-ng-if="data.userState=='LOCKED'">锁定</span>
+                        <span data-ng-if="data.userState=='FREEZE'">禁用</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="buttons" style="min-width: 200px;">
+                            <a class="btn btn-sm btn-primary" ui-sref="app.stationManage.createAccount({id: data.id})">编辑</a>
+                            <a class="btn btn-sm btn-warning" data-ng-if="data.userState=='ACTIVE'" data-ng-click="vm.freezeFunc(data.id)">禁用</a>
+                            <a class="btn btn-sm btn-warning" data-ng-if="data.userState=='FREEZE'" data-ng-click="vm.enableFunc(data.id)">启用</a>
+                            <a class="btn btn-sm btn-danger" data-ng-click="vm.resetPass(data.id)">重置密码</a>
+                            <a class="btn btn-sm btn-info" ui-sref="app.stationManage.accountDetail({id: data.id})">详情</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

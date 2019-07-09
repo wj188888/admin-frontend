@@ -1,0 +1,29 @@
+{
+  "name": "ez-confirm",
+  "version": "0.2.4",
+  "main": [
+    "dist/ez-confirm.min.js"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "ez-focus": "*"
+  },
+  "devDependencies": {
+    "angular": "1.2.*",
+    "angular-mocks": "1.2.*"
+  },
+  "homepage": "https://github.com/jdewit/ez-confirm",
+  "_release": "0.2.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.4",
+    "commit": "7340effade0fe0fb1ef2eb669c935bfb5f56270b"
+  },
+  "_source": "git://github.com/jdewit/ez-confirm.git",
+  "_target": "^0.2.4",
+  "_originalSource": "ez-confirm",
+  "_direct": true
+}

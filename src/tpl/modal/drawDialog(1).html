@@ -1,0 +1,12 @@
+<div class="reset-dialog" style="padding:10px 0;" >
+    <h4>提示</h4>
+    <div class="reset-item clearfix">
+       <p style="padding:0 30px;">
+           请确认已经完成为客户转账汇款{{vm.transferMoney}}元，确认后我们会立即短信通知用户。
+       </p>
+    </div>
+    <div class="reset-item clearfix" style="text-align: center;margin-top: 20px;">
+        <a class="btn btn-sm btn-default" style="margin-right: 50px;" data-ng-click="vm.haveTransfer()">已经转账</a>
+        <a class="btn btn-sm btn-info" data-ng-click="vm.closeDialog()">还没完成</a>
+    </div>
+</div>

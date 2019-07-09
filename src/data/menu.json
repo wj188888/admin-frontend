@@ -1,0 +1,140 @@
+[
+  {
+    "menu_name": "平台认证",
+    "menu_path": "app.shop",
+    "icon": "icon icon-plat",
+    "childmenu": [
+      {
+        "menu_name": "平台认证",
+        "menu_path": "app.shop.shopVerify"
+      },
+      {
+        "menu_name": "银行认证",
+        "menu_path": "app.shop.bankVerify"
+      },
+      {
+        "menu_name": "车辆认证",
+        "menu_path": "app.shop.carVerify"
+      },
+      {
+        "menu_name": "司机认证",
+        "menu_path": "app.shop.driverVerify"
+      },
+      {
+        "menu_name": "客户列表",
+        "menu_path": "app.shop.customerList"
+      },
+      {
+        "menu_name": "代制卡券",
+        "menu_path": "app.shop.couponVerify"
+      }
+    ]
+  },
+  {
+    "menu_name": "车站管理",
+    "menu_path": "app.stationManage",
+    "icon": " icon icon-station",
+    "childmenu": [
+      {
+        "menu_name": "车站列表",
+        "menu_path": "app.stationManage.stationList"
+      },
+      {
+        "menu_name": "创建车站",
+        "menu_path": "app.stationManage.createStation"
+      },
+      {
+        "menu_name": "验票账号",
+        "menu_path": "app.stationManage.personList"
+      },
+      {
+        "menu_name": "创建账号",
+        "menu_path": "app.stationManage.createAccount"
+      },
+      {
+        "menu_name": "站点审核",
+        "menu_path": "app.stationManage.siteList"
+      }
+    ]
+  },
+  {
+    "menu_name": "APP版本管理",
+    "menu_path": "app.appManage",
+    "icon": " icon icon-app",
+    "childmenu": [
+      {
+        "menu_name": "版本列表",
+        "menu_path": "app.appManage.versionList"
+      },
+//      {
+//        "menu_name": "服务上架",
+//        "menu_path": "app.appManage.serviceShelves"
+//      },
+      {
+        "menu_name": "创建版本",
+        "menu_path": "app.appManage.createVersion"
+      }
+    ]
+  },
+  {
+    "menu_name": "系统管理",
+    "menu_path": "app.adminUser",
+    "icon": " icon icon-sys",
+    "childmenu": [
+      {
+        "menu_name": "用户列表",
+        "menu_path": "app.adminUser.userList"
+      },
+      {
+        "menu_name": "创建用户",
+        "menu_path": "app.adminUser.createUser"
+      },
+      {
+        "menu_name": "角色列表",
+        "menu_path": "app.adminUser.roleList"
+      },
+      {
+        "menu_name": "创建角色",
+        "menu_path": "app.adminUser.createRole"
+      }
+    ]
+  },
+  {
+    "menu_name": "设置",
+    "menu_path": "app.adminSet",
+    "icon": " icon icon-set",
+    "childmenu": [
+      {
+        "menu_name": "标签设置",
+        "menu_path": "app.adminSet.labelList"
+      }
+    ]
+  },
+  {
+    "menu_name": "资产管理",
+    "menu_path": "app.assetManage",
+    "icon": " icon icon-asset",
+    "childmenu": [
+      {
+        "menu_name": "提现管理",
+        "menu_path": "app.assetManage.drawList"
+      },
+      {
+        "menu_name": "发票管理",
+        "menu_path": "app.assetManage.ticketGeneral"
+      },
+      {
+        "menu_name": "对账单",
+        "menu_path": "app.assetManage.accountGather"
+      },
+      {
+        "menu_name": "支付渠道",
+        "menu_path": "app.assetManage.payChannel"
+      },
+      {
+        "menu_name": "计费管理",
+        "menu_path": "app.assetManage.feeManage"
+      }
+    ]
+  }
+]

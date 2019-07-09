@@ -1,0 +1,117 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">品牌约车计费标准</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="row wrapper">
+            <div class="panel-body">
+                <div class="form-box">
+                    <div class="form-item clearfix"  data-ng-hide="vm.ruleData.type==1">
+                        <label>城市选择：</label>
+                        <select id="province" class="small"
+                                data-ng-model="vm.bindData.provinceId" chosen
+                                data-ng-options="Province.id as Province.alias for Province in vm.commonName['province']"
+                                data-ng-change="vm.findSubRegions('commonName', 'city', vm.bindData.provinceId)">
+                            <option value="">省</option>
+                        </select>
+                        <select id="city" class="form-control m-b"
+                                data-ng-model="vm.bindData.cityId" chosen
+                                data-ng-options="City.id as City.alias for City in vm.commonName['city']"
+                                data-ng-change="vm.findSubRegions('commonName', 'county', vm.bindData.cityId)">
+                            <option value="">市</option>
+                        </select>
+                        <!--<select id="county" class="form-control m-b"
+                                data-ng-model="vm.bindData.countyId" chosen
+                                data-ng-change="vm.findSubRegions('commonName', 'town', vm.bindData.countyId)"
+                                data-ng-options="County.id as County.name for County in vm.commonName['county']">
+                            <option value="">区</option>
+                        </select>-->
+                        <p class="error-tip clearfix" style="padding-left: 70px;" data-ng-hide="vm.showCityError">
+                            请选择城市
+                        </p>
+                    </div>
+                    <div class="form-item clearfix" data-ng-repeat="rule in vm.ruleData.chargingRuleItems track by $index">
+                        <div class="item-box clearfix">
+                            <label>车型：</label>
+                            <select class="form-control m-b"
+                                    data-ng-model="rule.carGrade"
+                                    data-ng-options="x.value as x.key for x in vm.carTypes">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </div>
+                        <div class="item-box-small clearfix">
+                            <label>起步价：</label>
+                            <input type="text" data-ng-model="rule.startupFee" maxlength="10" class="input-small">
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.startupFee)">请输入正确的起步价</span>
+                            </p>
+
+                        </div>
+                        <div class="item-box-small clearfix">
+                            <label>里程费：</label>
+                            <input type="text" data-ng-model="rule.mileageFee" maxlength="10" class="input-small">
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.mileageFee)">请输入正确的里程费</span>
+                            </p>
+
+                        </div>
+                        <div class="item-box-small clearfix">
+                            <label>时长费：</label>
+                            <input type="text"
+                                   data-ng-model="rule.durationFee"
+                                   maxlength="10"
+                                   class="input-small" >
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.durationFee)">请输入正确的时长费</span>
+                            </p>
+
+                        </div>
+                        <div class="item-box-small clearfix">
+                            <label>夜间费：</label>
+                            <input type="text" data-ng-model="rule.nightFee" maxlength="10" class="input-small">
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.nightFee)">请输入正确的夜间费</span>
+                            </p>
+
+                        </div>
+                        <div class="item-box-small clearfix">
+                            <label>远途费：</label>
+                            <input type="text"
+                                   data-ng-model="rule.longJourneyFee"
+                                   maxlength="10"
+                                   class="input-small">
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.longJourneyFee)">请输入正确的远途费</span>
+                            </p>
+
+                        </div>
+                        <div class="item-box-small">
+                            <label>最低消费：</label>
+                            <input type="text"
+                                   data-ng-model="rule.minConsumptionAmount"
+                                   maxlength="10"
+                                   class="input-small">
+                            <p data-ng-show="!vm.underway">
+                                <span class="error-flag" data-ng-if="vm.checkNumber(rule.minConsumptionAmount)">请输入正确的最低消费</span>
+                            </p>
+
+                        </div>
+                        <i class="delete" data-ng-show="$index>0" data-ng-click="vm.deleteCarRule($index)"></i>
+                        <!--<p class="error-tip clearfix" data-ng-hide="vm.underway">
+                        </p>-->
+                    </div>
+                    <div class="form-item mg-top-15 clearfix">
+                        <button class="btn btn-sm btn-info pull-left mar-l-20" data-ng-click="vm.addCarRule()" data-ng-show="vm.ruleData.chargingRuleItems.length<5">添加</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-3">
+                    <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                    <input type="submit" class="btn btn-sm btn-info" data-ng-click="vm.button.save()" data-ng-disabled="vm.button.disabled"
+                           value="{{vm.button.text}}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

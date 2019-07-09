@@ -1,0 +1,416 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">车辆认证</h1>
+</div>
+<div class="app">
+    <div class="app-inner clearfix">
+        <div class="page-controller buy-box" style="margin-bottom: 24px;" id="container">
+            <!--<div class="form-container clearfix">
+                <h2>车辆类型</h2>
+           
+            </div>-->
+            <div class="form-container clearfix">
+                <h2>基础信息</h2>
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <!--<div class="form-select">
+                            <label>车辆座位：</label>
+                            <select id="carType" chosen disable-search="true"
+                                    data-ng-model="vm.Car.carType"
+                                    ng-change="vm.findCar();vm.inTotalSeats()"
+                                    ng-options="value.code as value.name for value in vm.Cartypes">
+                            </select>
+                        </div>-->
+                        <!--<div class="form-select" data-ng-if="vm.Car.carType == 'DOWN_SEVEN'">
+                            <label>车辆细类：</label>
+                            <select chosen disable-search="true"
+                                    id="smallCarType"
+                                    data-ng-model="vm.Car.grade"
+                                    data-ng-change="vm.inTotalSeats()"
+                                    data-ng-options="value.code as value.name for value in vm.smallCarTypes">
+                                <option value=""></option>
+                            </select>
+                        </div>-->
+                        <div class="form-inline group-small">
+                            <label>车辆类型：</label>
+                            <label class="text-left">
+                                <span data-ng-show="vm.Car.category == 0">客运车</span>
+                                <span data-ng-show="vm.Car.category == 1">网约车</span>
+                                <span data-ng-show="vm.Car.category == 2">出租车</span>
+                                <span data-ng-show="vm.Car.category == 3">租赁车</span>
+                            </label>
+                        </div>
+                        <div class="form-select group-small">
+                            <label>隶属关系：</label>
+                            <label class="text-left">{{vm.Car.belongType | belongTypeCar}}</label>
+                        </div>
+                         <div class="form-select group-small" data-ng-if="vm.Car.category == 0">
+                            <label>班车类型：</label>
+                            <label class="text-left">{{vm.Car.generalCarRole.shuttleType|vmShuttleType}}</label>
+                        </div>
+
+                        <div class="form-select group-small">
+                            <label>车牌号码：</label>
+                            <label class="text-left">
+                                {{vm.Car.licensePlatType == '0' ? '黄' : '蓝'}}
+                                -
+                                {{vm.Car.licensePlatProvince}}
+                                -
+                                {{vm.Car.licensePlat}}
+                            </label>
+                        </div>
+                        <div class="form-select group-small">
+                            <label data-ng-if="vm.Car.category == 1 || vm.Car.category == 2 || vm.Car.category == 3 ">车辆品牌：</label>
+                            <label data-ng-if="vm.Car.category == 0">品牌车型：</label>
+                            <label class="text-left">{{vm.Car.brandName}}</label>
+                        </div>
+                        
+                          <div class="form-select group-small" data-ng-if="vm.category==1 || vm.category==3">
+                            <label>车辆细类：</label>
+                            <label class="text-left">{{vm.Car.gradeName}}</label>
+                        </div>
+                        <div class="form-select group-small">
+                            <label>车身颜色：</label>
+                            <label class="text-left">{{vm.Car.color}}</label>
+                        </div>
+                        <div class="form-select group-small" data-ng-if="vm.category==1 || vm.category==2 || (vm.category==3 && vm.Car.model)">
+                            <label>车辆型号：</label>
+                            <label class="text-left">{{vm.Car.model}}</label>
+                        </div>
+
+                        <div class="form-select group-small" data-ng-show="vm.category==0">
+                            <label>类型等级：</label>
+                            <label class="text-left">
+                                <span>{{vm.Car.type | vmCarType}}</span>
+                                <span data-ng-show="vm.Car.type&&vm.Car.level">-</span>
+                                <span>{{vm.Car.level | vmCarLevel}}</span>
+                            </label>
+                        </div>
+                        <!--<div class="form-select" data-ng-show="vm.category==0">
+                            <label>技术等级：</label>
+                            <select id="techniqueLevel" data-ng-model="vm.Car.techniqueLevel"
+                                    chosen disable-search="true"
+                                    data-ng-options="techniqueLevel.value as techniqueLevel.name for techniqueLevel in vm.techniqueLevels">
+                                <option value="">--请选择技术等级--</option>
+                            </select>
+                        </div>-->
+                        <!-- <div class="form-inline">
+                            <label>汽车排量：</label>
+                            <input type="text" id="displacement" data-ng-model="vm.Car.displacement"
+                            placeholder="请输入汽车排量" maxlength="4">
+                        </div> -->
+                        <div class="form-inline group-small" data-ng-if="vm.category==0 ||vm.category==3">
+                            <label>核载人数：</label>
+                            <label class="text-left">{{vm.Car.totalSeats}}</label>
+                        </div>
+
+                        <div class="form-inline group-small" data-ng-if="vm.category==0">
+                            <label>可售座位数：</label>
+                            <label class="text-left">{{vm.Car.seats}}</label>
+                        </div>
+
+                        <div class="form-select group-small" data-ng-if="vm.category==1">
+                            <label>车辆座位：</label>
+                            <label class="text-left">
+                                <span data-ng-show="vm.Car.totalSeats == 7">7座</span>
+                                <span data-ng-show="vm.Car.totalSeats == 5">5座</span>
+                                <span data-ng-show="vm.Car.totalSeats == 4">4座</span>
+                            </label>
+                        </div>
+                        <div data-ng-if="vm.category == 3">
+                            <div class="form-inline group-small">
+                                    <label>发动机号：</label>
+                                    <label class="text-left">{{vm.Car.rentCarRole.engineCode}}</label>
+                                </div>
+                                <!--<div class="form-inline">
+                                    <label><i class="required-tip" ng-show="vm.category==1">*</i>车架号：</label>
+                                    <input type="text" id="frameCode" data-ng-model="vm.Car.frameCode" placeholder="请输入车架号" maxlength="30" data-ng-change="vm.frameCodeTovehicleIdNumber()"/>
+                                </div>-->
+                                    <div class="form-inline group-small">
+                                    <label>车辆识别码：</label>
+                                    <label class="text-left">{{vm.Car.rentCarRole.vehicleIdNumber}}</label>
+                                </div>
+                                <div class="form-select group-small">
+                                    <label>车辆燃料类型：</label>
+                                    <label class="text-left">
+                                        <span data-ng-show="vm.Car.rentCarRole.fuelType == 0">汽油</span>
+                                        <span data-ng-show="vm.Car.rentCarRole.fuelType == 1">柴油</span>
+                                        <span data-ng-show="vm.Car.rentCarRole.fuelType == 2">天然气</span>
+                                        <span data-ng-show="vm.Car.rentCarRole.fuelType == 3">新能源</span>
+                                    </label>
+                                </div>
+                               
+                        </div>
+                        <div data-ng-if="vm.category == 3">
+                             <div class="form-inline group-small">
+                                    <label>发动机排量：</label>
+                                    <label class="text-left">
+                                        {{vm.Car.rentCarRole.displacement |displacementFilter}}
+                                    </label>
+                                </div>
+                                <div class="form-inline group-small">
+                                    <label>变速箱：</label>
+                                    <label class="text-left">
+                                        {{vm.Car.rentCarRole.gearbox}}
+                                    </label>
+                                </div>
+                        </div>
+
+                        <div data-ng-if="vm.category == 0">
+                             <div class="form-inline group-small">
+                                    <label>发动机排量：</label>
+                                    <label class="text-left">
+                                        {{vm.Car.generalCarRole.displacement |displacementFilter}}
+                                    </label>
+                                </div>
+                                <div class="form-inline group-small">
+                                    <label>变速箱：</label>
+                                    <label class="text-left">
+                                        {{vm.Car.generalCarRole.gearbox}}
+                                    </label>
+                                </div>
+                        </div>
+
+                        <div class="form-inline group-small">
+                            <label>服务城市：</label>
+                            <label class="text-left">
+                                {{vm.Car.serviceCity.province}}
+                                <span data-ng-show="vm.Car.serviceCity.province&&vm.Car.serviceCity.city">-</span>
+                                {{vm.Car.serviceCity.city}}
+                                <span data-ng-show="vm.Car.serviceCity.county&&vm.Car.serviceCity.city">-</span>
+                                {{vm.Car.serviceCity.county}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+            <div class="form-container clearfix" data-ng-if="vm.category==1">
+                <h2>更多资料</h2>
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="form-inline group-small">
+                            <label>核载人数：</label>
+                            <label class="text-left">{{vm.Car.totalSeats}}</label>
+                        </div>
+                        <div class="form-inline group-small">
+                            <label>发动机号：</label>
+                            <label class="text-left">{{vm.Car.chCarRole.engineCode}}</label>
+                        </div>
+                        <!--<div class="form-inline">
+                            <label><i class="required-tip" ng-show="vm.category==1">*</i>车架号：</label>
+                            <input type="text" id="frameCode" data-ng-model="vm.Car.frameCode" placeholder="请输入车架号" maxlength="30" data-ng-change="vm.frameCodeTovehicleIdNumber()"/>
+                        </div>-->
+                         <div class="form-inline group-small">
+                            <label>车辆识别码：</label>
+                            <label class="text-left">{{vm.Car.chCarRole.vehicleIdNumber}}</label>
+                        </div>
+                        <div class="form-select group-small">
+                            <label>车辆燃料类型：</label>
+                            <label class="text-left">
+                                <span data-ng-show="vm.Car.chCarRole.fuelType == 0">汽油</span>
+                                <span data-ng-show="vm.Car.chCarRole.fuelType == 1">柴油</span>
+                                <span data-ng-show="vm.Car.chCarRole.fuelType == 2">天然气</span>
+                                <span data-ng-show="vm.Car.chCarRole.fuelType == 3">新能源</span>
+                            </label>
+                        </div>
+                        <div class="form-inline group-small">
+                            <label>发动机排量：</label>
+                            <label class="text-left">
+                                {{vm.Car.chCarRole.displacement |displacementFilter}}
+                            </label>
+                        </div>
+                        <div class="form-inline group-small">
+                            <label>变速箱：</label>
+                            <label class="text-left">
+                                {{vm.Car.chCarRole.gearbox}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <div class="form-container pad-b-0 clearfix">
+                <h2 class="mar-b-15">车辆图片</h2>
+                <ul class="upload-car clearfix" id="J_picBox">
+                    <li>
+                    <a class="car-pic">
+                    <p class="delete-pic"></p>
+                    </a>
+                    </li>
+                    <li id="addCarPicBtn">
+                        <div class="upload-box button-upload-car pull-left">
+                            <p>建议上传3张，最多上传5张<br/>仅支持JPG、PNG、GIF三种格式，大小不超过1M</p>
+                            <a class="button button-small button-success">
+                                <i class="glyphicon glyphicon-open"></i>
+                            </a>
+                            <div id="carProgress"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="form-container clearfix car-margin-left">
+                <h2>资料上传</h2>
+                <h3 class="form-inline-tit">行驶证</h3>
+                <!-- 车辆识别代号 -->
+                <!--<div class="form-inline form-relative">
+                    <label>车辆识别代号：</label>
+                    <input type="text" id="vehicleIdNumber" data-ng-model="vm.Car.vehicleIdNumber" placeholder="请填写车辆识别代号" maxlength="18" />
+                </div>-->
+                <!-- 行驶证注册日期： -->
+                <div class="form-inline form-relative group-small">
+                    <label>注册日期：</label>
+                    <label class="text-left">{{vm.Car.drivingLicenseRegisterDate}}</label>
+                </div>
+                <!-- 行驶证年审日期： -->
+                <div class="form-inline form-relative group-small">
+                    <label>年审日期：</label>
+                    <label class="text-left">{{vm.Car.drivingLicenseValidDate}}</label>
+                </div>
+                <!-- 请上传行驶证正页 -->
+                <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                    <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Car.drivingLicenseImageList[0] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.drivingLicenseImageList[0])"/>
+
+                    <img class="upload-box upload-3-small pull-left" ng-src="{{vm.Car.drivingLicenseImageList[1] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.drivingLicenseImageList[1])"/>
+                </div>
+                <div data-ng-show="vm.category == 0">
+                    <h3 class="form-inline-tit">营运证</h3>
+                    <!-- 营运证注册日期： -->
+                    <div class="form-inline form-relative">
+                        <label><i class="required-tip" >*</i>注册日期：</label>
+                        <label class="text-left">{{vm.Car.generalCarRole.operateLicenseRegisterDate}}</label>
+                    </div>
+                    <!-- 营运证年审日期： -->
+                    <div class="form-inline form-relative">
+                        <label><i class="required-tip" >*</i>年审日期：</label>
+                        <label class="text-left">{{vm.Car.generalCarRole.operateLicenseValidDate}}</label>
+                    </div>
+                    <!-- 请上传营运证正页 -->
+                    <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                        <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Car.generalCarRole.operateLicenseImageList[0] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.generalCarRole.operateLicenseImageList[0])"/>
+
+                        <img class="upload-box upload-3-small pull-left" ng-src="{{vm.Car.generalCarRole.operateLicenseImageList[1] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.generalCarRole.operateLicenseImageList[1])"/>
+                    </div>
+                    <!--线路牌-->
+                    <h3 class="form-inline-tit">线路牌</h3>
+                    <!-- 线路牌号： -->
+                    <div class="form-inline form-relative">
+                        <label><i class="required-tip" >*</i>线路牌号：</label>
+                        <label class="text-left">{{vm.Car.generalCarRole.lineCardNo}}</label>
+                    </div>
+                    <!-- 线路牌有效期： -->
+                    <div class="form-inline form-relative">
+                        <label><i class="required-tip" >*</i>有效期至：</label>
+                        <label class="text-left">{{vm.Car.generalCarRole.lineCardValidDate}}</label>
+                    </div>
+                    <!-- 请上传线路牌正页 -->
+                    <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                        <img class="upload-box upload-3-small mar-l-130 pull-left" ng-src="{{vm.Car.generalCarRole.lineCardImageList[0] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.generalCarRole.lineCardImageList[0])"/>
+                    </div>
+                </div>
+                <div data-ng-show="vm.category == 1 || vm.category == 0">
+                 <h3 class="form-inline-tit">交强险</h3>
+                 <div class="form-inline form-relative group-small">
+                    <label>保险公司：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.compulsoryInsuranceCompany || vm.Car.generalCarRole.compulsoryInsuranceCompany}}</label>
+                </div>
+                <!-- 交强险保额： -->
+                <div class="form-inline form-relative group-small">
+                    <label>保险保额：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.compulsoryInsuranceAmount || vm.Car.generalCarRole.compulsoryInsuranceAmount}}</label>
+                </div>
+                <!-- 交强险失效日期： -->
+                <div class="form-inline form-relative group-small">
+                    <label>有效期至：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.compulsoryInsuranceValidDate || vm.Car.generalCarRole.compulsoryInsuranceValidDate}}</label>
+                </div>
+                <!-- 请上传交强险保单 -->
+                <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                    <img class="upload-box upload-3-small mar-l-130" ng-src="{{vm.Car.chCarRole.compulsoryInsuranceImageList[0] || vm.Car.generalCarRole.compulsoryInsuranceImageList[0]}}" data-ng-click="vm.img_show(vm.Car.chCarRole.compulsoryInsuranceImageList[0] || vm.Car.generalCarRole.compulsoryInsuranceImageList[0])"/>
+                </div>
+                <!-- <div class="form-inline form-auto-h mar-b-0 clearfix">
+                    <div class="upload-box upload-3-small mar-l-130 pull-left">
+                        <p>请上传交强险保单</p>
+                        <a class="upload-img" target="_blank" id="success1"></a>
+                    </div>
+                </div> -->
+
+                   <!-- 保险公司名称： -->
+                <h3 class="form-inline-tit">承运人险</h3>   
+                <div class="form-inline form-relative group-small">
+                    <label>保险公司：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.carrierInsuranceCompany || vm.Car.generalCarRole.carrierInsuranceCompany}}</label>
+                </div>
+                <!-- 承运人责任险金额： -->
+                <div class="form-inline form-relative group-small">
+                    <label>保险保额：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.carrierInsuranceAmount || vm.Car.generalCarRole.carrierInsuranceAmount}}</label>
+                </div>
+                <!-- 承运人责任险失效日期： -->
+                <div class="form-inline form-relative group-small">
+                    <label>有效期至：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.carrierInsuranceValidDate || vm.Car.generalCarRole.carrierInsuranceValidDate}}</label>
+                </div>
+                <!-- 请上传责任保险单 -->
+                <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                    <img class="upload-box upload-3-small mar-l-130" ng-src="{{vm.Car.generalCarRole.carrierInsuranceImageList[0] || vm.Car.chCarRole.carrierInsuranceImageList[0] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.chCarRole.carrierInsuranceImageList[0] || vm.Car.generalCarRole.carrierInsuranceImageList[0])"/>
+                </div>
+                <!-- <div class="form-inline form-auto-h mar-b-0 clearfix">
+                    <div class="upload-box upload-3-small mar-l-130 pull-left">
+                        <p>请上传责任保险单</p>
+                        <a class="upload-img" target="_blank" id="success1"></a>
+                    </div>
+                </div> -->  
+                <!-- 三者险保险公司名称： -->
+                <h3 class="form-inline-tit">三者险</h3>
+                <div class="form-inline form-relative group-small">
+                    <label>保险公司：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.businessInsuranceCompany || vm.Car.generalCarRole.businessInsuranceCompany}}</label>
+                </div>
+                <!-- 三者险保额： -->
+                <div class="form-inline form-relative group-small">
+                    <label>保险保额：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.businessInsuranceAmount || vm.Car.generalCarRole.businessInsuranceAmount}}</label>
+                </div>
+                <!-- 三者险失效日期： -->
+                <div class="form-inline form-relative group-small">
+                    <label>有效期至：</label>
+                    <label class="text-left">{{vm.Car.chCarRole.businessInsuranceValidDate || vm.Car.generalCarRole.businessInsuranceValidDate}}</label>
+                </div>
+                <!-- 请上传三者险保单 -->
+                <div class="form-inline form-auto-h clearfix form-margin-bottom-0 group-small">
+                    <img class="upload-box upload-3-small mar-l-130" ng-src="{{vm.Car.chCarRole.businessInsuranceImageList[0] || vm.Car.generalCarRole.businessInsuranceImageList[0] + vm.compressImage}}" data-ng-click="vm.img_show(vm.Car.chCarRole.businessInsuranceImageList[0] || vm.Car.generalCarRole.businessInsuranceImageList[0])"/>
+                </div>
+                <!-- <div class="form-inline form-auto-h mar-b-0 clearfix">
+                    <div class="upload-box upload-3-small mar-l-130 pull-left">
+                        <p>请上传三者险保单</p>
+                        <a class="upload-img" target="_blank" id="success1"></a>
+                    </div>
+                </div> -->
+                <!--data-ng-class="{false: 'close-error'}[vm.Car.carType == 'UP_SEVEN']"-->
+             
+             </div>
+            </div>
+            <!--<div class="form-container clearfix car-margin-left" data-ng-show="vm.category==1">
+                <h2>保险认证管理</h2>
+                
+            
+            </div>-->
+        </div>
+
+        <div class="button-suspension" data-ng-show="vm.carData.subQualification == 6">
+            <a class="button button-small button-success inline" data-ng-click="vm.passApply()">
+                审核通过
+            </a>
+
+            <a class="button button-small button-success inline" data-ng-click="vm.rejectApply()">
+                驳回
+            </a>
+        </div>
+    </div>
+</div>
+<div big-img-component img-show="imgShow" img="img"></div>
+
+
+
+
+

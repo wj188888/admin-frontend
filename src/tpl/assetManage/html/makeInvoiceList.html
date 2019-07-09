@@ -1,0 +1,112 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">对外开票</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="wrapper">
+            <ul class="fourth-nav clearfix">
+                <li class="bd-lf bd-top active">开票申请</li>
+                <li ui-sref="app.assetManage.makeInvoiceRecord" class="bd-lf bd-top bd-rt" >
+                    开票记录
+                </li>
+            </ul>
+            <div class="filter-condition mg-top-15 clearfix">
+                <div class="condition-top clearfix">
+                    <div class="con-left">
+                        <div class="group">
+                            <label>申请方：</label>
+                            <input data-ng-model="search.firmName" placeholder="请输入申请方" type="text" class="inp larger" maxlength="30"/>
+                        </div>
+                        <div class="group">
+                            <label>当前状态：</label>
+                            <!--状态1待审核2已驳回3待开票4已邮寄5已完成-->
+                            <select class="inp larger" data-ng-model="search.status"
+                                    data-ng-options="x.value as x.key for x in vm.status">
+                            </select>
+                        </div>
+                        <div class="group">
+                            <label>发票类型：</label>
+                            <select class="inp larger" data-ng-model="search.taxType"
+                                    data-ng-options="x.value as x.key for x in vm.ticketType">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="con-right">
+                        <div class="group">
+                            <label>申请时间：</label>
+                            <input id="from" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.staDate"  class="inp small"/>
+                            <span class="mg-10">至</span>
+                            <input id="to" type="text" readonly="readonly" date-pick format="YYYY-MM-DD"
+                                   data-ng-model="search.endDate" class="inp small"/>
+                        </div>
+                        <div class="group">
+                            <label>平台性质：</label>
+                            <select class="inp larger" data-ng-model="search.platformType"
+                                    data-ng-options="x.value as x.key for x in vm.platType">
+                                <option value="">全部</option>
+                                <option value="0">企业</option>
+                                <option value="1">个人</option>
+                            </select>
+                        </div>
+                        <div class="con-bottom clearfix">
+                            <a class="btn w-xs btn-info" data-ng-click="searchFunction()">筛选</a>
+                            <a class="btn w-xs btn-default" data-ng-click="cancelSearch()">清空条件</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table mg-top-15">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>申请方</th>
+                    <th>平台性质</th>
+                    <th>申请时间</th>
+                    <th>开票金额</th>
+                    <th>发票类型</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td>{{$index+1}}</td>
+                    <td>{{data.companyName}}</td>
+                    <td data-ng-if="!data.invoiceCompanyName">无</td>
+                    <td data-ng-if="data.invoicePlatformType == 0">企业</td>
+                    <td data-ng-if="data.invoicePlatformType == 1">个人</td>
+                    <td class="wd100">{{data.createdTime}} </td>
+                    <td>￥{{data.amount | number: 2}}</td>
+                    <td data-ng-if="data.invoiceType">
+                        <span data-ng-if="data.invoiceType == 0">电子发票</span>
+                        <span data-ng-if="data.invoiceType == 1">纸质发票</span>
+                    </td>
+                    <td data-ng-if="!data.invoiceType">无</td>
+                    <!--状态1待审核2已驳回3待开票4已邮寄5已完成-->
+                    <td data-ng-if="data.status">
+                        <span data-ng-if="data.status == 1">待审核</span>
+                        <span data-ng-if="data.status == 2">已驳回</span>
+                        <span data-ng-if="data.status == 3">待开票</span>
+                        <span data-ng-if="data.status == 4">已邮寄</span>
+                        <span data-ng-if="data.status == 5">已完成</span>
+                    </td>
+                    <td>
+                        <a class="btn w-xs btn-info" data-ng-if="data.status == 1"
+                           data-ng-click="vm.openDialog(data.id)">审核</a>
+                        <a class="btn w-xs btn-info" data-ng-if="data.status == 2||data.status == 4||data.status == 5" data-ng-click="vm.openDialog(data.id)">
+                            查看
+                        </a>
+                        <a class="btn w-xs btn-info" data-ng-if="data.status == 3"
+                           data-ng-click="vm.openDialog(data.id)">
+                            开票
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>
+<div class="com-modal-mask" data-ng-show="vm.showDialog"></div>

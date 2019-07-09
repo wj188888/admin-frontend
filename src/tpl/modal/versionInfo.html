@@ -1,0 +1,82 @@
+<!--查看版本历史-->
+<div class="asset-dialog">
+    <div class="ticket-dialog">
+        <span class="close-icon" data-ng-click="vm.cancleFunc()"></span>
+    </div>
+
+    <div class="text-content pad-l-20 pad-r-20">
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">应用渠道：</label>
+            <div class="group">
+                <img data-ng-if="vm.versionHisList.appChannel == 0"
+                     class="application" src="img/Android-big-hover.png" alt="安卓">
+                <img data-ng-if="vm.versionHisList.appChannel == 1"
+                     class="application" src="img/iPhone.png" alt="苹果">
+            </div>
+        </div>
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">产品类别：</label>
+            <div class="group">
+                <span>{{vm.versionHisList.productTypeLevelOne | productName}}</span>
+            </div>
+        </div>
+        <!--<div class="version-group">
+            <label class="varsion_label mar-b-0">产品名称：</label>
+            <div class="group">
+                <span>连接城际专线</span>
+            </div>
+        </div>-->
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">版本号：</label>
+            <div class="group">
+                <span>{{vm.versionHisList.versionNum}}</span>
+            </div>
+        </div>
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">下载地址：</label>
+            <div class="group">
+                <span>{{vm.versionHisList.downloadUrl}}</span>
+            </div>
+        </div>
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">更新方式：</label>
+            <div class="group">
+                <div class="radio_verBox" data-ng-if="vm.versionHisList.updateMode == 1">
+                    <input type="radio" class="mar-0" value="0" checked>
+                    <span class="mar-l-5 mar-t-0">强制</span>
+                </div>
+                <div class="radio_verBox" data-ng-if="vm.versionHisList.updateMode == 0">
+                    <input type="radio" class="mar-0" value="1" checked>
+                    <span class="mar-l-5 mar-t-0">非强制</span>
+                </div>
+            </div>
+        </div>
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">更新开关：</label>
+            <div class="group">
+                <div class="col-sm-9">
+                    <div class="ui-switcher-small"
+                         data-ng-click="vm.choiceSet(vm.versionHisList.updateSwitch)"
+                         data-ng-class="{'ui-switcher-on': vm.versionHisList.updateSwitch == 1 , 'ui-switcher-off': vm.versionHisList.updateSwitch == 0}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="version-group">
+            <label class="varsion_label mar-b-0">更新内容：</label>
+            <div class="group">
+                <span>{{vm.versionHisList.updateContent}}</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="ticket-operator">
+        <div class="mid clearfix">
+            <a class="btn w-xs btn-default"
+               data-ng-click="vm.cancleFunc()">关闭</a>
+            <a class="btn w-xs btn-info"
+               data-ng-click="vm.confirmFunc(vm.versionHisList.id)">删除记录</a>
+        </div>
+    </div>
+</div>

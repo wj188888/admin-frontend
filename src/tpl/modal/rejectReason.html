@@ -1,0 +1,19 @@
+<div class="reset-dialog reject-reason">
+    <div class="label-container clearfix">
+        <ul class="clearfix">
+            <li data-ng-repeat="data in vm.labelLists" data-ng-click="vm.fillEvent(data.labelContent)">
+                {{data.labelName}}
+            </li>
+        </ul>
+    </div>
+    <div class="reset-item clearfix" style="height:auto;">
+        <label>驳回理由：</label>
+        <textarea id="reason" type="text"
+               style="width:360px;height:60px;" maxlength="50" 
+               data-ng-model="vm.qualificationFailReason"></textarea>
+    </div>
+    <div class="reset-item clearfix" style="text-align: center;margin-top: 20px;">
+        <a class="btn btn-sm btn-default" data-ng-click="vm.closeDialog()">取消</a>
+        <a class="btn btn-sm btn-info" data-ng-click="vm.rejectFunc()">确认</a>
+    </div>
+</div>

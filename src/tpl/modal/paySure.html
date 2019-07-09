@@ -1,0 +1,14 @@
+<div class="reset-dialog pad-20">
+    <div class="reset-item reset clearfix">
+        <label>月份：</label>
+        <span class="line-height-32">{{vm.date}}</span>
+    </div>
+    <div class="reset-item reset clearfix">
+        <label>确认已付金额：</label>
+        <input id="amount" type="text" data-ng-model="vm.amount"/>
+    </div>
+    <div class="reset-item clearfix" style="text-align: center;margin-top: 20px;">
+        <a class="btn btn-sm btn-default" data-ng-click="vm.closeDialog()">取消</a>
+        <a class="btn btn-sm btn-info" data-ng-click="vm.paySureFunc()">确认</a>
+    </div>
+</div>

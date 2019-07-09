@@ -1,0 +1,102 @@
+<div class="app">
+    <div class="app-inner clearfix">
+        <div class="page-controller filter-condition clearfix pad-b-20 pad-t-0 relative">
+            <div class="set site-verify">
+                <div class="contact mar-l-0 mar-t-20 wd100pre">
+                    <div class="item">
+                        <label class="label"><i class="required-tip">*</i>选择分类：</label>
+                        <span class="siteTypeDefault"
+                               data-ng-class="{false:'siteTypeDefault', true: 'siteTypeChecked'}[type.clicked]" data-ng-repeat="type in vm.publicSiteTypes"
+                        >
+                            <i class="checked"></i>
+                            {{type.name}}
+                        </span>
+                        <p class="siteTip" ng-if="vm.showTip">注：原来站点类型是“{{vm.tempSelectedSite.join(',')}}”</p>
+                    </div>
+                    <div class="item">
+                        <label class="label"><i class="required-tip">*</i>站点编号：</label>
+                        <input class="inp large-inp"
+                               disabled
+                               ng-model="vm.site.code" type="text"
+                               placeholder="站点编号"
+                        >
+                    </div>
+                    <div class="item">
+                        <label class="label no-background"><i class="required-tip">*</i>输入名称：</label>
+                        <input class="inp large-inp"
+                               id="siteName"
+                               ng-model="vm.tempSite.name" type="text"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请输入站点名称"
+                        >
+                        <p class="siteTip" ng-if="vm.showTip">注：原来站点名称是“{{vm.site.name}}”</p>
+                    </div>
+                    <div class="item">
+                        <label class="label"><i class="required-tip">*</i>站点地址：</label>
+                        <input class="inp select wd127"
+                               ng-model="vm.tempSite.province.name" type="text"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请输入站点名称"
+                        >
+                        <input class="inp select wd127"
+                               ng-model="vm.tempSite.city.name" type="text"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请输入站点名称"
+                        >
+                        <input class="inp select wd126"
+                               ng-model="vm.tempSite.county.name" type="text"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请输入站点名称"
+                        >
+                        <div style="width: 100%;float: left;"></div>
+                        <input class="inp select wd400"
+                               data-ng-if="vm.tempSite.town"
+                               style="margin-left:103px;"
+                               ng-model="vm.tempSite.town.name" type="text"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请输入站点名称"
+                        >
+                        <p class="siteTip" ng-if="vm.showTip">注：原来地址是“{{vm.site.area}}”</p>
+                    </div>
+                    <div class="item">
+                        <input id="searchPosi" class="inp large-inp address"
+                               type="text" ng-model="vm.tempSite.address"
+                               data-ng-disabled="vm.disabled"
+                               placeholder="请填写详细地址"
+                        >
+                        <p class="siteTip" ng-if="vm.showTip">注：原来详细地址是“{{vm.site.address}}”</p>
+                    </div>
+                    <div class="item">
+                        <label class="label"><i class="required-tip">*</i>站点经度：</label>
+                        <input id="lng" class="inp small-inp wd147"
+                               disabled
+                               data-ng-model="vm.tempSite.longitude"
+                               type="text"
+                        >
+                        <label class="label"><i class="required-tip">*</i>站点纬度：</label>
+                        <input id="lat" class="inp small-inp wd148"
+                               disabled
+                               data-ng-model="vm.tempSite.latitude"
+                               type="text"
+                        >
+                    </div>
+                </div>
+                <div class="map pad-l-0" style="margin-bottom: 60px;">
+                    <label class="label">地图定位：</label>
+                    <div class="map-location" id="map-location">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-suspension" data-ng-if="vm.site.qualification == 2">
+            <a class="button button-small button-success inline" data-ng-click="vm.passFunc()">
+                审核通过
+            </a>
+
+            <a class="button button-small button-success inline" data-ng-click="vm.rejectApply()">
+                驳回
+            </a>
+        </div>
+    </div>
+</div>

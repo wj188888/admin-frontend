@@ -1,0 +1,39 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">角色列表</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="m-l m-r m-t">
+            <button class="btn btn-sm btn-info" ui-sref="app.system.createRole">创建角色</button>
+        </div>
+        <div class="wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-left" nowrap>序号</th>
+                    <!--<th>编号</th>-->
+                    <th>角色名</th>
+                    <th>更新时间</th>
+                    <th class="text-right">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="data in options.dataList">
+                    <td class="text-left">{{$index+1}}</td>
+                    <!--<td>{{data.id}}</td>-->
+                    <!--{{data.roleName.join("、")}}-->
+                    <td nowrap width="35%">{{data.roleName}}</td>
+                    <td nowrap width="35%">{{data.updatedTime}}</td>
+                    <td class="text-right" nowrap  width="20%">
+                        <div class="buttons">
+                            <a class="btn btn-sm btn-primary" ui-sref="app.system.createRole({id: data.id})">编辑</a>
+                            <a class="btn btn-sm btn-warning" data-ng-click="vm.deleteRole(data.id)">删除</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <page-data options="options"></page-data>
+        </div>
+    </div>
+</div>

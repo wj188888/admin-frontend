@@ -1,0 +1,47 @@
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">菜单管理-创建/编辑菜单</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请认真填写菜单信息</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">菜单编号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="code" data-ng-model="vm.menuData.code" class="form-control m-b" placeholder="请输入菜单编号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">菜单名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="menu_name" data-ng-model="vm.menuData.menu_name" class="form-control m-b" placeholder="请输入菜单名">
+                        </div>
+                    </div>
+                    <div class="form-group"  >
+                        <label class="col-sm-3 control-label">菜单路径：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="menu_path" data-ng-model="vm.menuData.menu_path" class="form-control m-b" placeholder="请输入菜单路径">
+                        </div>
+                    </div>
+                    <div class="form-group"  >
+                        <label class="col-sm-3 control-label">菜单顺序：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="order" data-ng-model="vm.menuData.order" class="form-control m-b" placeholder="请输入菜单顺序">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createMenuSave()">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

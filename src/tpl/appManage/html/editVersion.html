@@ -1,0 +1,140 @@
+<!--版本编辑-->
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">编辑版本</h1>
+</div>
+<div class="wrapper-md pad-b-0">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>请在此编辑版本</strong>
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-6 m-b-xs">
+                <div role="form" class="form-horizontal">
+                    <div class="form-group filter-condition" style="padding-left: 0px; background: #fff; ">
+                        <label class="col-sm-3 control-label">应用渠道：</label>
+                        <div class="col-sm-9 group" style="width: 75%; margin-bottom: 0px">
+                            <img data-ng-if="vm.App.appChannel == 0"
+                                 class="application" src="img/Android-big-hover.png" alt="安卓">
+                            <img data-ng-if="vm.App.appChannel == 1"
+                                 class="application" src="img/iPhone.png" alt="苹果">
+                        </div>
+                    </div>
+                    <div class="form-group filter-condition pad-t-0" style="padding-left: 0px; background: #fff; ">
+                        <label class="col-sm-3 control-label">产品类别：</label>
+                        <div class="col-sm-9 group" style="width: 75%; margin-bottom: 0px">
+                            <span>{{vm.App.productTypeLevelOne | productName}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">产品名称：</label>
+                        <div class="col-sm-9 group" style="width: 75%; margin-bottom: 0px">
+                            <span class="mar-l-10" data-ng-if="vm.App.appName">{{vm.App.appName}}App</span>
+                            <span class="mar-l-10" data-ng-if="!vm.App.appName">-</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">版本号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="version"  data-ng-model="vm.App.versionNum" class="form-control m-b" placeholder="请输入APP版本号">
+                            <div class="pad-l-10 f-c-999 font-size-12">注：请确保您填写的版本大于当前版本。</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">下载地址：</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="downUrl" data-ng-model="vm.App.downloadUrl" class="form-control m-b" placeholder="请输入下载地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">应用包：</label>
+                        <div class="col-sm-9 group">
+                            <div class="upload_box">
+                                <a type="button"
+                                   id="upfileBtn"
+                                   class="button button-small up_Btn"
+                                   data-ng-class="{'button-normal-empty':!vm.fileName,'button-success':!!vm.fileName}">
+                                    {{vm.onLoadTxt}}
+                                </a>
+                                <a data-ng-if="vm.fileName"
+                                   data-ng-click="vm.uploadPath(vm.App.productTypeLevelOne)"
+                                   href="{{vm.loadHref}}"
+                                   class="mar-l-10 f-c-337ab7 upBox">{{vm.fileName}}</a>
+                                <a data-ng-if="!vm.fileName"
+                                   data-ng-click="vm.uploadPath(vm.App.productTypeLevelOne)"
+                                   href="{{vm.App.downloadUrl}}"
+                                   class="mar-l-10 f-c-337ab7 upBox">
+                                    {{vm.App.packageName}}
+                                </a>
+                                <form enctype="multipart/form-data" name="postform" id="postform">
+                                    <input type="file" name="file"
+                                           id="upfile">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">更新方式：</label>
+                        <div class="col-sm-9">
+                            <label class="checkbox-inline i-checks">
+                                <input data-ng-model="vm.App.updateMode" type="radio" value="1">
+                                <i></i>
+                                强制
+                            </label>
+                            <label class="checkbox-inline i-checks">
+                                <input type="radio" data-ng-model="vm.App.updateMode"  value="0">
+                                <i></i>
+                                非强制
+                            </label>
+                            <div class="mar-t-10 pad-l-10 f-c-999 font-size-12">注：非强制更新用户可以选择性更新。</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">更新开关：</label>
+                        <div class="col-sm-9">
+                            <div class="ui-switcher-small"
+                                 data-ng-click="vm.choiceSet(vm.App.updateSwitch)"
+                                 data-ng-class="{'ui-switcher-on': vm.App.updateSwitch == 1 , 'ui-switcher-off': vm.App.updateSwitch == 0}"></div>
+                            <div class="mar-t-10 pad-l-10 f-c-999 font-size-12">注：打开开关后，APP端将收到更新提醒，如果已更新为最新版本则不提醒。</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">更新内容：</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="content" placeholder="请输入更新内容" data-ng-model="vm.App.updateContent" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="btn btn-sm btn-primary" data-ng-click="vm.goHistory()">返回</button>
+                            <button type="submit" class="btn btn-sm btn-info" data-ng-click="vm.createVersionFunc()">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light lter b-b wrapper">
+    <h1 class="m-n font-thin h3">历史版本</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="row wrapper">
+            <div class="historyBox">
+                <ul class="historyUl">
+                    <li class="historyLi" data-ng-repeat="versionHisList in vm.versionHisList">
+                        <div class="hisUp">
+                            <span class="hisTxt">版本{{versionHisList.versionNum}}</span>
+                            <span class="hisTxt mar-l-10">更新时间 {{versionHisList.createdTime}}</span>
+                        </div>
+                        <div class="hisDown">
+                            <p>{{versionHisList.updateContent}}</p>
+                        </div>
+                        <a class="lookInfo" data-ng-click="vm.lookInfo(versionHisList.id)">查看详情</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
